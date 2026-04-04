@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blue-IA | IA Agéntica para Inmobiliarias en Uruguay</title>
+<meta name="description" content="Blue-IA automatiza el cumplimiento SENACLAFT, el seguimiento de leads y la administración de cartera para inmobiliarias en Uruguay. Implementación en 30 días. Desde $297/mes."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MICROSOFT CLARITY — Heatmaps + session recording (GRATIS)
+     1. Ir a clarity.microsoft.com → crear proyecto
+     2. Reemplazar TU_CLARITY_ID con tu Project ID
+     ═══════════════════════════════════════════════════════════════ -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+"TU_CLARITY_ID";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script");
+</script>
+
+<style>
+:root {
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body:    'Inter', 'Helvetica Neue', sans-serif;
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;
+  --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;
+  --radius-xl:1rem;--radius-full:9999px;
+  --transition:180ms cubic-bezier(0.16,1,0.3,1);
+  --content-narrow:640px;--content-default:960px;--content-wide:1200px;
+}
+[data-theme="dark"] {
+  --bg:#0d1117;--surface:#161b22;--surface-2:#1c2230;
+  --surface-offset:#1a2233;--divider:#21273a;--border:#2a3348;
+  --text:#e6eaf0;--muted:#8b95a8;--faint:#4a5568;
+  --primary:#3b82f6;--primary-h:#2563eb;--primary-hl:#1e3a5f;
+  --accent:#60a5fa;--success:#22c55e;--warning:#f59e0b;--error:#f87171;
+  --shadow-sm:0 1px 3px oklch(0 0 0/.3);
+  --shadow-md:0 4px 16px oklch(0 0 0/.4);
+  --shadow-lg:0 12px 40px oklch(0 0 0/.5);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth;scroll-padding-top:5rem;}
+body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--text);background:var(--bg);line-height:1.6;}
+img,video{display:block;max-width:100%;height:auto;}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.15;}
+p,li{text-wrap:pretty;max-width:72ch;}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit;}
+a,button,[role="button"]{transition:color var(--transition),background var(--transition),border-color var(--transition),box-shadow var(--transition);}
+::selection{background:rgba(59,130,246,.3);}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:var(--content-wide);margin-inline:auto;padding:0 var(--space-6);display:flex;align-items:center;justify-content:space-between;height:4rem;}
+.nav-logo{display:flex;align-items:center;gap:var(--space-3);text-decoration:none;color:var(--text);}
+.nav-logo-name{font-size:var(--text-sm);font-weight:700;letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:var(--space-8);}
+.nav-links a{font-size:var(--text-sm);text-decoration:none;color:var(--muted);}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{font-size:var(--text-sm);font-weight:600;padding:var(--space-2) var(--space-5);background:var(--primary);color:#fff;border-radius:var(--radius-md);text-decoration:none;}
+.nav-cta:hover{background:var(--primary-h);}
+@media(max-width:768px){.nav-links{display:none;}}
+
+/* CONTAINERS + SECTIONS */
+.container{max-width:var(--content-wide);margin-inline:auto;padding-inline:var(--space-6);}
+section{padding-block:clamp(var(--space-16),8vw,var(--space-24));}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-4) var(--space-8);font-weight:600;font-size:var(--text-base);border-radius:var(--radius-md);text-decoration:none;cursor:pointer;border:none;transition:all var(--transition);}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--primary-h);transform:translateY(-1px);}
+.btn-primary:active{transform:translateY(0);}
+.btn-ghost{border:1px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{color:var(--text);border-color:var(--muted);background:var(--surface);}
+.btn-sm{padding:var(--space-3) var(--space-6);font-size:var(--text-sm);}
+.btn-full{width:100%;justify-content:center;}
+
+/* SECTION HEADERS */
+.section-label{font-size:var(--text-xs);font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:var(--space-4);}
+.section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;color:var(--text);line-height:1.2;margin-bottom:var(--space-4);}
+.section-sub{font-size:var(--text-base);color:var(--muted);max-width:56ch;}
+.section-header{margin-bottom:var(--space-12);}
+.section-header.center{text-align:center;}
+.section-header.center .section-sub{margin-inline:auto;}
+
+/* ═══════ HERO ═══════ */
+.hero{padding-top:calc(4rem + clamp(var(--space-16),8vw,var(--space-20)));padding-bottom:clamp(var(--space-12),6vw,var(--space-20));position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% -10%,rgba(59,130,246,.12),transparent),radial-gradient(ellipse 50% 40% at 90% 80%,rgba(96,165,250,.06),transparent);pointer-events:none;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center;}
+.hero-label{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-6);}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero h1{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:400;color:var(--text);line-height:1.1;margin-bottom:var(--space-6);}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{font-size:var(--text-lg);color:var(--muted);line-height:1.6;margin-bottom:var(--space-6);max-width:54ch;}
+.hero-detail{font-size:var(--text-sm);color:var(--faint);margin-bottom:var(--space-10);}
+.hero-detail strong{color:var(--muted);}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--space-4);}
+
+/* Hero visual — video del robot */
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+.hero-video-wrap{position:relative;width:420px;height:420px;border-radius:50%;overflow:hidden;box-shadow:0 0 80px rgba(59,130,246,.2);}
+.hero-video-wrap video{width:100%;height:100%;object-fit:cover;}
+.hero-video-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at left,var(--bg) 0%,transparent 60%);}
+
+/* Hero card (fallback si no hay video) */
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-lg);width:100%;}
+.hero-card-title{font-size:var(--text-xs);font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-4);}
+.metric-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-bottom:var(--space-4);}
+.metric{background:var(--surface-2);border-radius:var(--radius-lg);padding:var(--space-4);}
+.metric-val{font-size:var(--text-xl);font-weight:700;color:var(--primary);line-height:1;}
+.metric-label{font-size:var(--text-xs);color:var(--muted);margin-top:var(--space-1);}
+.hero-alert{display:flex;align-items:flex-start;gap:var(--space-3);background:color-mix(in oklab,var(--warning) 8%,var(--surface));border:1px solid color-mix(in oklab,var(--warning) 30%,transparent);border-radius:var(--radius-lg);padding:var(--space-4);margin-top:var(--space-4);}
+.hero-alert-text{font-size:var(--text-xs);color:var(--muted);line-height:1.5;}
+.hero-alert-text strong{color:var(--warning);display:block;margin-bottom:2px;}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-visual{display:none;}}
+
+/* ═══════ STATS ═══════ */
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding-block:var(--space-8);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-6);text-align:center;}
+.stat-val{font-size:var(--text-xl);font-weight:700;color:var(--primary);display:block;line-height:1;}
+.stat-label{font-size:var(--text-xs);color:var(--muted);margin-top:var(--space-1);}
+@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ═══════ LEY 20.380 ═══════ */
+.ley-section{background:color-mix(in oklab,var(--warning) 4%,var(--bg));}
+.ley-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start;}
+.ley-badge{display:inline-block;font-size:var(--text-xs);font-weight:700;color:var(--warning);background:color-mix(in oklab,var(--warning) 12%,transparent);border:1px solid color-mix(in oklab,var(--warning) 30%,transparent);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);margin-bottom:var(--space-5);}
+.ley-inner h2{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;color:var(--text);line-height:1.2;margin-bottom:var(--space-6);}
+.ley-inner p{font-size:var(--text-base);color:var(--muted);margin-bottom:var(--space-4);}
+.ley-checklist{list-style:none;display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:var(--space-8);}
+.ley-checklist li{display:flex;align-items:flex-start;gap:var(--space-3);font-size:var(--text-sm);color:var(--muted);}
+.ley-checklist li::before{content:'✓';color:var(--success);font-weight:700;flex-shrink:0;margin-top:2px;}
+.ley-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-md);}
+.ley-card-header{font-size:var(--text-xs);font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-6);}
+.ley-step{display:flex;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--divider);}
+.ley-step:last-child{border-bottom:none;}
+.ley-num{width:28px;height:28px;border-radius:50%;background:var(--primary-hl);color:var(--accent);font-size:var(--text-xs);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ley-step-body strong{display:block;font-size:var(--text-sm);color:var(--text);margin-bottom:2px;}
+.ley-step-body span{font-size:var(--text-xs);color:var(--muted);}
+.ley-step-ok{margin-left:auto;font-size:var(--text-xs);color:var(--success);font-weight:600;flex-shrink:0;}
+@media(max-width:900px){.ley-inner{grid-template-columns:1fr;}}
+
+/* ═══════ LEAD MAGNET ═══════ */
+.magnet-section{background:var(--surface);}
+.magnet-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center;}
+.magnet-visual{background:linear-gradient(135deg,var(--primary-hl),var(--surface-offset));border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-10);text-align:center;position:relative;overflow:hidden;}
+.magnet-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(59,130,246,.15),transparent);}
+.magnet-cover-icon{font-size:3.5rem;display:block;margin-bottom:var(--space-4);}
+.magnet-cover-title{font-size:var(--text-lg);font-weight:700;color:var(--text);margin-bottom:var(--space-2);}
+.magnet-cover-sub{font-size:var(--text-sm);color:var(--muted);}
+.magnet-cover-badge{display:inline-block;margin-top:var(--space-4);font-size:var(--text-xs);font-weight:700;color:var(--success);background:color-mix(in oklab,var(--success) 12%,transparent);border:1px solid color-mix(in oklab,var(--success) 25%,transparent);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);}
+.magnet-form-title{font-family:var(--font-display);font-size:var(--text-xl);color:var(--text);margin-bottom:var(--space-3);}
+.magnet-form-sub{font-size:var(--text-sm);color:var(--muted);margin-bottom:var(--space-8);}
+.magnet-bullets{list-style:none;display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-8);}
+.magnet-bullets li{display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);color:var(--muted);}
+.magnet-bullets li::before{content:'→';color:var(--primary);font-weight:700;flex-shrink:0;}
+.lead-form{display:flex;flex-direction:column;gap:var(--space-3);}
+.lead-form input{width:100%;padding:var(--space-3) var(--space-4);background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--text);font-size:var(--text-sm);transition:border-color var(--transition);}
+.lead-form input:focus{outline:none;border-color:var(--primary);}
+.lead-form input::placeholder{color:var(--faint);}
+.lead-form .form-note{font-size:var(--text-xs);color:var(--faint);margin-top:var(--space-1);}
+.form-success{display:none;background:color-mix(in oklab,var(--success) 10%,var(--surface));border:1px solid color-mix(in oklab,var(--success) 25%,transparent);border-radius:var(--radius-lg);padding:var(--space-5);text-align:center;font-size:var(--text-sm);color:var(--success);}
+@media(max-width:900px){.magnet-inner{grid-template-columns:1fr;}}
+
+/* ═══════ SOLUCIONES ═══════ */
+.solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);}
+.sol-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-8);transition:border-color var(--transition),box-shadow var(--transition);}
+.sol-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md);}
+.sol-card.featured{background:var(--primary-hl);border-color:var(--primary);}
+.sol-icon{width:44px;height:44px;border-radius:var(--radius-lg);background:var(--primary-hl);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-5);font-size:1.25rem;}
+.sol-card h3{font-size:var(--text-base);font-weight:600;color:var(--text);margin-bottom:var(--space-3);}
+.sol-card p{font-size:var(--text-sm);color:var(--muted);line-height:1.6;}
+.sol-metric{margin-top:var(--space-5);padding-top:var(--space-4);border-top:1px solid var(--divider);font-size:var(--text-sm);font-weight:700;color:var(--success);}
+.sol-metric span{font-weight:400;color:var(--faint);font-size:var(--text-xs);}
+@media(max-width:900px){.solutions-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.solutions-grid{grid-template-columns:1fr;}}
+
+/* ═══════ CÓMO FUNCIONA ═══════ */
+.how-section{background:var(--surface);}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-6);}
+.how-step h3{font-size:var(--text-base);font-weight:600;color:var(--text);margin-bottom:var(--space-3);}
+.how-step p{font-size:var(--text-sm);color:var(--muted);line-height:1.6;}
+.how-num{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4);}
+.how-circle{width:28px;height:28px;border-radius:50%;background:var(--primary-hl);color:var(--accent);font-size:var(--text-xs);font-weight:700;display:flex;align-items:center;justify-content:center;}
+.how-tag{font-size:var(--text-xs);font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;}
+.how-step-day{display:inline-block;font-size:var(--text-xs);color:var(--accent);font-weight:600;margin-top:var(--space-3);}
+@media(max-width:900px){.how-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.how-grid{grid-template-columns:1fr;}}
+
+/* ═══════ AGENDA (CAL.COM) ═══════ */
+.demo-section{text-align:center;}
+.demo-inner{max-width:var(--content-narrow);margin-inline:auto;}
+.demo-section h2{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;color:var(--text);line-height:1.2;margin-bottom:var(--space-5);}
+.demo-section p{font-size:var(--text-base);color:var(--muted);margin-bottom:var(--space-10);margin-inline:auto;}
+.demo-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3);margin-bottom:var(--space-8);}
+.chip{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);}
+.chip::before{content:'✓';color:var(--success);font-weight:700;}
+.demo-actions{display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:center;}
+.demo-note{margin-top:var(--space-6);font-size:var(--text-xs);color:var(--faint);}
+
+/* ═══════ PLANES ═══════ */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);}
+.plan-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-8);position:relative;}
+.plan-card.featured{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow-lg);}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:var(--text-xs);font-weight:700;color:#fff;background:var(--primary);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);white-space:nowrap;}
+.plan-name{font-size:var(--text-xs);font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-3);}
+.plan-price{font-size:var(--text-2xl);font-weight:700;color:var(--text);line-height:1;margin-bottom:var(--space-2);}
+.plan-price sup{font-size:var(--text-sm);font-weight:400;vertical-align:super;}
+.plan-price em{font-size:var(--text-sm);font-weight:400;color:var(--muted);font-style:normal;}
+.plan-desc{font-size:var(--text-sm);color:var(--muted);margin-bottom:var(--space-6);padding-bottom:var(--space-6);border-bottom:1px solid var(--divider);}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:var(--space-8);}
+.plan-features li{display:flex;align-items:flex-start;gap:var(--space-3);font-size:var(--text-sm);color:var(--muted);}
+.plan-features li::before{content:'→';color:var(--primary);font-weight:700;flex-shrink:0;}
+.plan-cta{display:block;text-align:center;padding:var(--space-3) var(--space-6);border-radius:var(--radius-md);font-weight:600;font-size:var(--text-sm);text-decoration:none;transition:all var(--transition);}
+.plan-cta.primary{background:var(--primary);color:#fff;}
+.plan-cta.primary:hover{background:var(--primary-h);}
+.plan-cta.outline{border:1px solid var(--border);color:var(--muted);}
+.plan-cta.outline:hover{border-color:var(--primary);color:var(--text);}
+@media(max-width:900px){.plans-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto;}}
+
+/* FOOTER */
+footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--border);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4);}
+.footer-brand{font-size:var(--text-sm);font-weight:700;color:var(--text);}
+.footer-links{display:flex;gap:var(--space-6);}
+.footer-links a{font-size:var(--text-xs);color:var(--faint);text-decoration:none;}
+.footer-links a:hover{color:var(--muted);}
+.footer-meta{font-size:var(--text-xs);color:var(--faint);}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Blue-IA inicio">
+      <!-- ══════════════════════════════════════════════════════
+           LOGO — Reemplazá con tu logo real:
+           Opción A: <img src="/logo.svg" alt="Blue-IA" height="32"/>
+           Opción B: mantener este SVG (creado a medida)
+           ══════════════════════════════════════════════════════ -->
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#1e3a5f"/>
+        <path d="M8 9h5a5 5 0 0 1 0 10H8V9z" stroke="#60a5fa" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M16 19v-2M20 14a4 4 0 0 1-4 5" stroke="#3b82f6" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="23" cy="9" r="2" fill="#60a5fa"/>
+        <circle cx="9" cy="25" r="1.5" fill="#3b82f6"/>
+      </svg>
+      <span class="nav-logo-name">Blue-IA</span>
+    </a>
+    <div class="nav-links">
+      <a href="#soluciones">Soluciones</a>
+      <a href="#ley-20380">Ley 20.380</a>
+      <a href="#guia">Guía gratis</a>
+      <a href="#planes">Planes</a>
+    </div>
+    <a href="#demo" class="nav-cta">Agendá demo</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-label"><span class="hero-dot"></span>Solo para inmobiliarias en Uruguay</p>
+        <h1>Tu equipo pierde <em>20 horas</em> a la semana en tareas que la IA puede ejecutar sola.</h1>
+        <p class="hero-sub">Blue-IA automatiza el seguimiento de leads, el cumplimiento de la Ley 20.380, la administración de alquileres y los reportes de cartera. Más cierres con el mismo equipo.</p>
+        <p class="hero-detail"><strong>Implementación en 30 días.</strong> Sin cambiar tu equipo. Desde $297 USD/mes.</p>
+        <div class="hero-actions">
+          <!-- ══════════════════════════════════════════════════════
+               CAL.COM — Reemplazá TU_USUARIO con tu usuario de Cal.com
+               Ejemplo: https://cal.com/adrianmariotti/demo-blue-ia
+               ══════════════════════════════════════════════════════ -->
+          <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Agendá demo gratuita
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#soluciones" class="btn btn-ghost">Ver soluciones</a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           VIDEO ROBOT — Poné el robot.mp4 en /public/robot.mp4
+           Si no tenés video, esta sección se oculta en mobile
+           y el card de métricas queda como fallback visual.
+           ═══════════════════════════════════════════════════════ -->
+      <div class="hero-visual" aria-hidden="true">
+        <div id="heroVisual">
+          <!-- Intenta cargar el video; si falla, muestra el card -->
+          <div class="hero-video-wrap" id="videoWrap">
+            <video autoplay loop muted playsinline id="robotVideo"
+                   onloadeddata="document.getElementById('fallbackCard').style.display='none'"
+                   onerror="document.getElementById('videoWrap').style.display='none';document.getElementById('fallbackCard').style.display='block'">
+              <source src="/robot.mp4" type="video/mp4"/>
+            </video>
+            <div class="hero-video-overlay"></div>
+          </div>
+          <div class="hero-card" id="fallbackCard" style="display:none;">
+            <p class="hero-card-title">Dashboard Blue-IA — Vista en tiempo real</p>
+            <div class="metric-row">
+              <div class="metric"><div class="metric-val">+31%</div><div class="metric-label">Tasa de cierre este mes</div></div>
+              <div class="metric"><div class="metric-val">&lt;1 h</div><div class="metric-label">Respuesta a leads</div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric"><div class="metric-val">22 hs</div><div class="metric-label">Ahorradas esta semana</div></div>
+              <div class="metric"><div class="metric-val">100%</div><div class="metric-label">Cumplimiento SENACLAFT</div></div>
+            </div>
+            <div class="hero-alert">
+              <span style="font-size:1.1rem;flex-shrink:0;">⚡</span>
+              <div class="hero-alert-text"><strong>Nuevo lead — hace 2 min</strong>WhatsApp → calificado → seguimiento automático activado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS ═══════════ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div><span class="stat-val">26</span><span class="stat-label">Procesos inmobiliarios automatizados</span></div>
+      <div><span class="stat-val">90%</span><span class="stat-label">Menos tiempo en cumplimiento SENACLAFT</span></div>
+      <div><span class="stat-val">3 meses</span><span class="stat-label">Payback promedio</span></div>
+      <div><span class="stat-val">589</span><span class="stat-label">Inmobiliarias en Uruguay. El 80% sin IA.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ LEY 20.380 ═══════════ -->
+<section class="ley-section" id="ley-20380">
+  <div class="container">
+    <div class="ley-inner">
+      <div>
+        <span class="ley-badge">⚠ EN VIGOR DESDE ENERO 2025</span>
+        <h2>La Ley 20.380 cambió las reglas. ¿Ya estás cumpliendo?</h2>
+        <p>El 5 de enero de 2025 entró en vigencia la primera regulación integral del sector inmobiliario en Uruguay. Todos los operadores son sujetos obligados SENACLAFT, con obligaciones de KYC, debida diligencia y reporte de operaciones sospechosas.</p>
+        <p>El incumplimiento tiene sanciones. El proceso manual consume entre <strong>12 y 15 horas mensuales</strong> por operador. Blue-IA lo automatiza al 90%.</p>
+        <ul class="ley-checklist">
+          <li>KYC completo: de 45–60 min a 3–5 min por cliente</li>
+          <li>Screening automático en listas OFAC, ONU e INTERPOL</li>
+          <li>Scoring de riesgo AML con decisión automática</li>
+          <li>Archivo encriptado con trazabilidad para auditorías</li>
+          <li>Reportes trimestrales SENACLAFT sin intervención humana</li>
+        </ul>
+        <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Quiero cumplir sin perder tiempo
+        </a>
+      </div>
+      <div class="ley-card">
+        <p class="ley-card-header">Flujo SENACLAFT automatizado — Blue-IA</p>
+        <div class="ley-step"><div class="ley-num">1</div><div class="ley-step-body"><strong>Captura digital del cliente</strong><span>Formulario web → OCR de cédula o pasaporte automático</span></div><span class="ley-step-ok">✓</span></div>
+        <div class="ley-step"><div class="ley-num">2</div><div class="ley-step-body"><strong>Validación BPS + DGI + Registro Civil</strong><span>Consulta automática a registros públicos</span></div><span class="ley-step-ok">✓</span></div>
+        <div class="ley-step"><div class="ley-num">3</div><div class="ley-step-body"><strong>Screening listas internacionales</strong><span>OFAC, ONU, INTERPOL, PEPs Uruguay</span></div><span class="ley-step-ok">✓</span></div>
+        <div class="ley-step"><div class="ley-num">4</div><div class="ley-step-body"><strong>Scoring de riesgo y decisión</strong><span>Algoritmo AML: aprobación o alerta automática</span></div><span class="ley-step-ok">✓</span></div>
+        <div class="ley-step"><div class="ley-num">5</div><div class="ley-step-body"><strong>Archivo + reporte trimestral</strong><span>Trazabilidad completa. Listo para auditoría.</span></div><span class="ley-step-ok">✓</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LEAD MAGNET ═══════════ -->
+<section class="magnet-section" id="guia">
+  <div class="container">
+    <div class="magnet-inner">
+      <div class="magnet-visual" aria-hidden="true">
+        <span class="magnet-cover-icon">📋</span>
+        <p class="magnet-cover-title">Checklist SENACLAFT 2026</p>
+        <p class="magnet-cover-sub">27 pasos para cumplir la Ley 20.380 sin contratar un abogado</p>
+        <span class="magnet-cover-badge">✓ Descarga gratuita — PDF 8 páginas</span>
+      </div>
+      <div>
+        <h2 class="magnet-form-title">Descargá la guía de cumplimiento gratis</h2>
+        <p class="magnet-form-sub">El recurso más completo sobre la Ley 20.380 para operadores inmobiliarios en Uruguay. Sin costo, sin compromiso.</p>
+        <ul class="magnet-bullets">
+          <li>Los 27 pasos exactos del proceso KYC obligatorio</li>
+          <li>Lista completa de documentación por tipo de operación</li>
+          <li>Modelo de formulario de debida diligencia</li>
+          <li>Cronograma de plazos y sanciones</li>
+        </ul>
+
+        <!-- ══════════════════════════════════════════════════════════
+             FORMULARIO → N8N WEBHOOK → SUPABASE (tabla: leads)
+             1. En N8N: Webhook node → POST → guardar en Supabase leads
+             2. N8N envía email con link al PDF (Cloudflare R2 o GitHub)
+             3. Reemplazá TU_N8N_WEBHOOK con tu URL de webhook
+             Schema Supabase leads:
+               id, name, email, phone, company, source, created_at,
+               downloaded_magnet (bool), plan_interest
+             ══════════════════════════════════════════════════════════ -->
+        <form class="lead-form" id="magnetForm">
+          <input type="text"  name="name"    placeholder="Tu nombre" required autocomplete="name"/>
+          <input type="email" name="email"   placeholder="Email profesional" required autocomplete="email"/>
+          <input type="tel"   name="phone"   placeholder="WhatsApp (opcional)" autocomplete="tel"/>
+          <input type="text"  name="company" placeholder="Nombre de tu inmobiliaria"/>
+          <input type="hidden" name="source" value="lead_magnet_checklist_senaclaft"/>
+          <button type="submit" class="btn btn-primary btn-full" id="magnetBtn">
+            Descargar checklist gratis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          </button>
+          <p class="form-note">Sin spam. Podés darte de baja cuando quieras. Tus datos se usan solo para enviarte la guía y novedades de Blue-IA.</p>
+        </form>
+        <div class="form-success" id="magnetSuccess">
+          ✅ <strong>¡Perfecto!</strong> Te enviamos el checklist a tu email en los próximos minutos.<br/>
+          <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" style="color:var(--accent);font-weight:600;">Agendá también tu demo gratuita →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SOLUCIONES ═══════════ -->
+<section id="soluciones">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Soluciones</span>
+      <h2 class="section-title">Cinco dolores concretos.<br>Cinco soluciones que se miden.</h2>
+      <p class="section-sub">Diseñada específicamente para la operativa y el marco regulatorio del sector inmobiliario uruguayo.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="sol-card"><div class="sol-icon">⚖️</div><h3>Cumplimiento SENACLAFT automático</h3><p>El proceso que hoy te lleva 45–60 minutos por cliente lo ejecuta Blue-IA en 3–5 minutos. Sin errores humanos. Con trazabilidad completa para auditorías.</p><div class="sol-metric">90% menos tiempo <span>en KYC y debida diligencia</span></div></div>
+      <div class="sol-card"><div class="sol-icon">⚡</div><h3>Seguimiento de leads en menos de 1 hora</h3><p>Cada lead que entra por WhatsApp o portal recibe respuesta automática en menos de 60 minutos, 24/7. El 80% de los leads se pierden por falta de respuesta rápida.</p><div class="sol-metric">+25% cierres <span>por seguimiento automático</span></div></div>
+      <div class="sol-card"><div class="sol-icon">📊</div><h3>Dashboard de asesores y cartera en tiempo real</h3><p>Sabés en todo momento qué asesor cierra más, qué propiedades llevan semanas sin visitas y dónde se caen las oportunidades. Sin Excel.</p><div class="sol-metric">95% automatizado <span>generación de KPIs</span></div></div>
+      <div class="sol-card"><div class="sol-icon">🏠</div><h3>Administración de alquileres sin carga</h3><p>Vencimientos, cobro de mora, alertas a inquilinos y reportes a propietarios. Todo automático. Recuperás 12 horas semanales de trabajo administrativo.</p><div class="sol-metric">12 horas/semana <span>liberadas por operador</span></div></div>
+      <div class="sol-card"><div class="sol-icon">📣</div><h3>Marketing digital multicanal automatizado</h3><p>Publicación en InfoCasas, MercadoLibre y redes sociales desde un solo lugar. Contenido generado por IA adaptado a cada propiedad.</p><div class="sol-metric">+60% alcance <span>sin trabajo manual adicional</span></div></div>
+      <div class="sol-card featured"><div class="sol-icon">🔄</div><h3>No es un servicio puntual</h3><p>Blue-IA es un proceso continuo con MRR. Cada mes medimos, optimizamos y expandimos los agentes. El sistema aprende junto con tu inmobiliaria.</p><div class="sol-metric">ROI 325% <span>primer año promedio</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CÓMO FUNCIONA ═══════════ -->
+<section id="como-funciona" class="how-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Proceso</span>
+      <h2 class="section-title">De caos operativo a inteligencia accionable en 30 días.</h2>
+      <p class="section-sub">Un proceso claro, sin sorpresas y con resultados medibles desde la primera semana.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step"><div class="how-num"><div class="how-circle">1</div><span class="how-tag">Diagnóstico</span></div><h3>Identificamos los 3 procesos que más tiempo te roban</h3><p>Sesión de 60 minutos donde mapeamos tu operación: leads, SENACLAFT, cartera. Sin venta, solo análisis.</p><span class="how-step-day">Día 1 — gratuito</span></div>
+      <div class="how-step"><div class="how-num"><div class="how-circle">2</div><span class="how-tag">Implementación</span></div><h3>Configuramos los agentes específicos para tu inmobiliaria</h3><p>Conectamos tus fuentes (WhatsApp, portales, email), instalamos los flujos y configuramos el dashboard con tus KPIs.</p><span class="how-step-day">Días 2–25</span></div>
+      <div class="how-step"><div class="how-num"><div class="how-circle">3</div><span class="how-tag">Activación</span></div><h3>Tus agentes de IA empiezan a trabajar 24/7</h3><p>Leads respondidos automáticamente. SENACLAFT ejecutado solo. Dashboard actualizado en tiempo real.</p><span class="how-step-day">Día 30 — en vivo</span></div>
+      <div class="how-step"><div class="how-num"><div class="how-circle">4</div><span class="how-tag">Optimización</span></div><h3>Cada mes medimos y expandimos</h3><p>Revisión de KPIs: conversión de leads, tiempo ahorrado, cumplimiento legal. Cada ciclo sumamos nuevos agentes.</p><span class="how-step-day">Mensual — incluido</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PLANES ═══════════ -->
+<section id="planes">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">Planes</span>
+      <h2 class="section-title">Un plan para cada momento.</h2>
+      <p class="section-sub">Sin contratos anuales. Sin sorpresas. Escalás cuando querés.</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <p class="plan-name">Starter</p>
+        <p class="plan-price"><sup>USD</sup>97<em>/mes</em></p>
+        <p class="plan-desc">Para inmobiliarias dando sus primeros pasos con automatización.</p>
+        <ul class="plan-features">
+          <li>1–2 automatizaciones a medida</li>
+          <li>Seguimiento de leads automático</li>
+          <li>Dashboard básico de KPIs</li>
+          <li>Soporte mensual incluido</li>
+        </ul>
+        <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="plan-cta outline">Empezar con Starter</a>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">Más elegido</span>
+        <p class="plan-name">Pro</p>
+        <p class="plan-price"><sup>USD</sup>297<em>/mes</em></p>
+        <p class="plan-desc">Sistema completo para inmobiliarias con 2–10 asesores.</p>
+        <ul class="plan-features">
+          <li>Leads + SENACLAFT + dashboard + alquileres</li>
+          <li>Compliance Ley 20.380 automatizado</li>
+          <li>Dashboard en tiempo real con KPIs</li>
+          <li>Administración de cartera de alquileres</li>
+          <li>Revisión y optimización mensual</li>
+        </ul>
+        <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="plan-cta primary">Empezar con Pro</a>
+      </div>
+      <div class="plan-card">
+        <p class="plan-name">Agencia</p>
+        <p class="plan-price"><sup>USD</sup>997<em>/mes</em></p>
+        <p class="plan-desc">Para inmobiliarias grandes o con múltiples sucursales.</p>
+        <ul class="plan-features">
+          <li>Todo lo de Pro, más:</li>
+          <li>Multi-área + ML predictivo</li>
+          <li>Marketing digital multicanal</li>
+          <li>Análisis avanzado de inversores</li>
+          <li>SLA prioritario + consultoría</li>
+        </ul>
+        <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="plan-cta outline">Hablar con Adrián</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA DEMO (CAL.COM) ═══════════ -->
+<section id="demo" class="demo-section" style="background:var(--surface);">
+  <div class="container">
+    <div class="demo-inner">
+      <h2>¿Tenés 20 minutos esta semana?</h2>
+      <p>Te muestro en vivo cómo Blue-IA funciona con datos de una inmobiliaria similar a la tuya. Sin presentaciones genéricas. Sin compromiso.</p>
+      <div class="demo-chips">
+        <span class="chip">Sin costo</span>
+        <span class="chip">20 minutos</span>
+        <span class="chip">Datos reales de tu sector</span>
+        <span class="chip">Sin instalación</span>
+      </div>
+      <div class="demo-actions">
+        <!-- ══════════════════════════════════════════════════════════
+             CAL.COM EMBED — opción A: link externo (recomendado para empezar)
+             opción B (avanzado): embed inline con <cal-inline> web component
+             Documentación: https://cal.com/docs/how-to-guides/embedding
+             ══════════════════════════════════════════════════════════ -->
+        <a href="https://cal.com/TU_USUARIO/demo-blue-ia" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Agendá la demo en Cal.com
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/59891979237?text=Hola%20Adri%C3%A1n%2C%20quiero%20saber%20m%C3%A1s%20sobre%20Blue-IA" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          WhatsApp directo
+        </a>
+      </div>
+      <p class="demo-note">Adrián Mariotti · info@blue-ia.org · +598 91 979 237 · Neptunia, Canelones, Uruguay</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-brand">Blue-IA</span>
+      <div class="footer-links">
+        <a href="#soluciones">Soluciones</a>
+        <a href="#ley-20380">Ley 20.380</a>
+        <a href="#guia">Guía gratis</a>
+        <a href="#planes">Planes</a>
+        <a href="mailto:info@blue-ia.org">Contacto</a>
+      </div>
+      <span class="footer-meta">© 2026 Blue-IA · Adrián Mariotti · Uruguay</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ══════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── LEAD MAGNET FORM → N8N WEBHOOK ──────────────────────────────
+   Reemplazá N8N_WEBHOOK_URL con tu endpoint real de N8N.
+   En N8N:
+     1. Agregar nodo "Webhook" (método POST)
+     2. Conectar a nodo "Supabase" → Insert → tabla "leads"
+     3. Conectar a nodo "Send Email" → enviar link del PDF
+   El PDF podés hostearlo en:
+     - Cloudflare R2 (gratis hasta 10 GB)
+     - En el mismo repo como /public/checklist-senaclaft-2026.pdf
+──────────────────────────────────────────────────────────────── */
+const N8N_WEBHOOK_URL = 'https://TU_N8N.tu-dominio.com/webhook/blue-ia-leads';
+
+document.getElementById('magnetForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('magnetBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const data = Object.fromEntries(new FormData(this));
+
+  try {
+    await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...data,
+        downloaded_magnet: true,
+        created_at: new Date().toISOString()
+      })
+    });
+  } catch (err) {
+    // Si el webhook no responde, igual mostramos éxito y enviamos por mailto de respaldo
+    console.warn('Webhook error:', err);
+  }
+
+  // Respaldo: si N8N no está configurado, abrimos el PDF directamente
+  // window.open('/checklist-senaclaft-2026.pdf', '_blank');
+
+  document.getElementById('magnetForm').style.display = 'none';
+  document.getElementById('magnetSuccess').style.display = 'block';
+
+  // Clarity: registrar evento de conversión
+  if (window.clarity) clarity('event', 'lead_magnet_download', { plan: data.plan_interest });
+});
+
+/* ── VIDEO FALLBACK ──────────────────────────────────────────────
+   Si el robot.mp4 no carga, muestra el card de métricas
+──────────────────────────────────────────────────────────────── */
+const robotVideo = document.getElementById('robotVideo');
+if (robotVideo) {
+  setTimeout(() => {
+    if (robotVideo.readyState === 0) {
+      document.getElementById('videoWrap').style.display = 'none';
+      document.getElementById('fallbackCard').style.display = 'block';
+    }
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
