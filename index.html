@@ -295,10 +295,9 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
         <div id="heroVisual">
           <!-- Intenta cargar el video; si falla, muestra el card -->
           <div class="hero-video-wrap" id="videoWrap">
-            <video autoplay loop muted playsinline id="robotVideo"
-                   onloadeddata="document.getElementById('fallbackCard').style.display='none'"
-                   onerror="document.getElementById('videoWrap').style.display='none';document.getElementById('fallbackCard').style.display='block'">
-              <source src="/robot.mp4" type="video/mp4"/>
+            <video autoplay loop muted playsinline style="width:100%;border-radius:50%;display:block;">
+                  <source src="/robot.webm" type="video/webm"/>
+                  <source src="/robot.mp4" type="video/mp4"/>
             </video>
             <div class="hero-video-overlay"></div>
           </div>
