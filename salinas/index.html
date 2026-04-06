@@ -458,22 +458,9 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
 </footer>
 
 <script>
-/*
-  ════════════════════════════════════════════════════════════════
-  INSTRUCCIÓN PARA ACTIVAR EL FORMULARIO
-  ════════════════════════════════════════════════════════════════
-  1. Abrí este archivo en GitHub → botón Edit (lápiz)
-  2. Buscá: BREVO_API_KEY_AQUI
-  3. Reemplazá con tu API key real de Brevo
-  4. Guardá (Commit changes)
-
-  List ID ya configurado: 3 (ACS Salinas Evento 10/4)
-  ════════════════════════════════════════════════════════════════
-*/
-
-const BREVO_API_KEY = 'BREVO_API_KEY_AQUI';
+const WORKER_URL  = 'https://blue-ia-inscripcion.fotografozen.workers.dev';
 const BREVO_LIST_ID = 3;
-const ADRIAN_WA    = '59891979237';
+const ADRIAN_WA   = '59891979237';
 
 document.getElementById('regForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -503,27 +490,18 @@ document.getElementById('regForm').addEventListener('submit', async function(e) 
   };
 
   try {
-    const res = await fetch('https://api.brevo.com/v3/contacts', {
+    await fetch(WORKER_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': BREVO_API_KEY
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    // 409 = contacto ya existe → igual mostramos éxito
-    if (!res.ok && res.status !== 204 && res.status !== 409) {
-      console.warn('Brevo status:', res.status);
-    }
   } catch (err) {
-    console.warn('Fetch error:', err);
+    console.warn('Worker error:', err);
   }
 
-  // Mostrar pantalla de éxito
   document.getElementById('regForm').style.display   = 'none';
   document.getElementById('regSuccess').style.display = 'block';
 
-  // Notificación WhatsApp a Adrián (solo mobile para no interrumpir en desktop)
   const msg = encodeURIComponent(
     `🎉 Nueva inscripción ACS Salinas 10/4\n\n` +
     `Nombre: ${firstName} ${lastName}\n` +
