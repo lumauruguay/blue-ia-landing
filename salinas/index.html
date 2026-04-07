@@ -93,9 +93,6 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));}
 .hero-visual{display:flex;justify-content:center;align-items:flex-start;}
 .video-vertical-wrap{position:relative;width:100%;max-width:300px;aspect-ratio:9/16;border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--border);box-shadow:0 0 60px rgba(59,130,246,.15);background:var(--surface-2);}
 .video-vertical-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);padding:var(--space-8);text-align:center;}
-.video-placeholder-icon{font-size:3rem;opacity:.35;}
-.video-placeholder-text{font-size:var(--text-xs);color:var(--faint);line-height:1.6;}
 @media(max-width:900px){
   .hero-grid{grid-template-columns:1fr;}
   .hero-visual{order:-1;}
@@ -152,24 +149,8 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));}
 
 /* BIO */
 .bio-inner{display:grid;grid-template-columns:auto 1fr;gap:var(--space-12);align-items:center;max-width:var(--content-default);margin-inline:auto;}
-.bio-avatar{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  background:var(--surface);
-  border:3px solid var(--border);
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-.bio-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.bio-avatar{width:140px;height:140px;border-radius:50%;background:var(--surface);border:3px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bio-avatar img{width:100%;height:100%;object-fit:cover;}
 .bio-name{font-family:var(--font-display);font-size:var(--text-xl);color:var(--text);margin-bottom:var(--space-2);}
 .bio-role{font-size:var(--text-sm);color:var(--accent);font-weight:600;margin-bottom:var(--space-4);}
 .bio-text{font-size:var(--text-sm);color:var(--muted);line-height:1.7;margin-bottom:var(--space-3);}
@@ -230,30 +211,14 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
         </div>
       </div>
 
-      <!-- VIDEO VERTICAL
-           ══════════════════════════════════════════════════════
-           Cuando tengas el video subido a YouTube como "No listado":
-           1. Abrí este archivo en GitHub → Edit (lápiz)
-           2. Buscá el texto: id="videoPlaceholder"
-           3. Reemplazá TODO el bloque <div class="video-placeholder">
-              con este iframe:
-
-           <iframe
-             src="https://www.youtube.com/embed/TU_VIDEO_ID?rel=0&modestbranding=1"
-             title="Adrián Mariotti — Inteligencia Comercial Blue-IA"
-             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-             allowfullscreen>
-           </iframe>
-
-           Donde TU_VIDEO_ID es el código al final de la URL de YouTube
-           Ejemplo: https://youtu.be/dQw4w9WgXcQ → ID = dQw4w9WgXcQ
-           ══════════════════════════════════════════════════════ -->
       <div class="hero-visual">
         <div class="video-vertical-wrap">
-          <div class="video-placeholder" id="videoPlaceholder">
-            <span class="video-placeholder-icon">🎬</span>
-            <p class="video-placeholder-text">Video de Adrián<br/>próximamente.<br/><br/>Subís a YouTube → reemplazás el ID en el código.</p>
-          </div>
+          <iframe
+            src="https://www.youtube.com/embed/XGg4p0ZuupI?rel=0&modestbranding=1"
+            title="Adrián Mariotti — Inteligencia Comercial Blue-IA"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
 
@@ -443,8 +408,8 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
 <section id="sobre-adrian">
   <div class="container">
     <div class="bio-inner">
-      <div class="bio-avatar">   
-        <img src="/FotoMariotti1.jpg" alt="Adrián Mariotti" />
+      <div class="bio-avatar">
+        <img src="/FotoMariotti1.jpg" alt="Adrián Mariotti"/>
       </div>
       <div>
         <h2 class="bio-name">Adrián Mariotti</h2>
@@ -452,9 +417,9 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
         <p class="bio-text">Veinte años como reportero gráfico en Mendoza, corresponsal en el rescate de los 33 mineros de Copiapó. Delegado sindical, realizador audiovisual, analista de datos — top 9 de más de 100 en su promoción a los 57 años.</p>
         <p class="bio-text">Hoy implementa sistemas de inteligencia artificial agéntica para PyMEs en Uruguay: automatización real, datos accionables, resultados medibles desde el primer mes.</p>
         <ul class="bio-creds">
-          <li>Caso Po Baasco: Instagram de 0 a 10K+ · sala llena · videoclip premiado</li>
+          <li>Cliente Pío Bagnasco: creación de perfil de Instagram profesional con campaña en Meta exitosa y videoclip elegido en Festival de Cine Nuevo Detour</li>
           <li>Stack real: N8N · Claude API · Supabase · Metabase — ya funcionando</li>
-          <li>Analista de Datos JR — UCM con beca de Estado, Telefónica</li>
+          <li>Analista de Datos diplomado en la Universidad Católica de Montevideo, becado por el Estado.</li>
           <li>Implementaciones activas en comercios de Canelones, Uruguay</li>
         </ul>
       </div>
