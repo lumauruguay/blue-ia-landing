@@ -55,6 +55,7 @@
     .btn-primary {
       background: var(--blue); color: #fff; font-weight: 700; font-size: 1rem;
       padding: .85rem 2rem; border-radius: 10px; text-decoration: none; transition: background .2s, transform .15s;
+      display: inline-block; text-align: center;
     }
     .btn-primary:hover { background: var(--blue-hover); transform: translateY(-2px); }
     .btn-secondary {
@@ -65,7 +66,7 @@
     .btn-secondary:hover { border-color: var(--accent); }
     .hero-visual { flex-shrink: 0; }
 
-    /* ROBOT — scale calibrado para mostrar ojos */
+    /* ROBOT */
     .hero-visual .robot-wrap {
       width: 280px; height: 280px;
       border-radius: 50%;
@@ -144,7 +145,7 @@
       margin-bottom: 2.5rem; max-width: 800px;
     }
     .dato-intro strong { color: var(--text); }
-    .tabla-wrap { overflow-x: auto; margin-bottom: 1.75rem; }
+    .tabla-wrap { overflow-x: auto; margin-bottom: 1rem; }
     table { width: 100%; border-collapse: collapse; font-size: .88rem; }
     thead tr { background: var(--blue-dark); }
     thead th { padding: .9rem 1.1rem; text-align: left; color: var(--accent); font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -161,6 +162,24 @@
     .tag-google { background: #1a2e1a; color: #4ade80; }
     .tag-crm { background: #2d1e3a; color: #c084fc; }
     .tag-futuro { background: #2a2318; color: #fbbf24; }
+
+    /* Filas ocultas de la tabla */
+    tr.tabla-oculta { display: none; }
+    tr.tabla-oculta.visible { display: table-row; }
+
+    /* Botón expandir tabla */
+    .btn-expandir {
+      display: flex; align-items: center; gap: .5rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--accent); font-size: .85rem; font-weight: 600;
+      padding: .65rem 1.25rem; border-radius: 8px; cursor: pointer;
+      margin-bottom: 1.75rem; transition: border-color .2s, background .2s;
+      width: fit-content;
+    }
+    .btn-expandir:hover { border-color: var(--accent); background: var(--surface); }
+    .btn-expandir .chevron { font-size: .75rem; transition: transform .3s; }
+    .btn-expandir.abierto .chevron { transform: rotate(180deg); }
+
     .dato-cierre {
       background: linear-gradient(135deg, var(--blue-dark), #1c2a40);
       border: 1px solid var(--blue); border-radius: 12px;
@@ -192,7 +211,7 @@
     .precio-total {
       background: linear-gradient(135deg, var(--blue-dark), #1c2a40);
       border: 1px solid var(--blue); border-radius: 14px; padding: 2rem;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;
     }
     .precio-total .label { font-size: 1rem; color: var(--muted); }
     .precio-total .total { font-size: 2.2rem; font-weight: 800; color: #fff; }
@@ -275,6 +294,16 @@
       .funnel-step::after { display: none; }
       table { font-size: .8rem; }
       .hero-visual .robot-wrap { width: 200px; height: 200px; }
+
+      /* FIX botón precio-total en mobile */
+      .precio-total {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .precio-total .btn-primary {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -324,31 +353,26 @@
     <h2>Lo que está pasando hoy en Energym</h2>
     <p class="section-intro">Cuatro problemas concretos que frenan el crecimiento. El sistema existe para resolverlos uno por uno.</p>
     <div class="cards-grid col2 rv">
-
       <div class="card">
         <div class="icon">💬</div>
         <h3>Las consultas llegan pero no convierten</h3>
         <p>Las consultas llegan por WhatsApp e Instagram, pero muchas se quedan en el camino sin convertir. Sin un proceso claro, cada consulta perdida es un socio que no entró.</p>
       </div>
-
       <div class="card">
         <div class="icon">📊</div>
         <h3>Sin visibilidad sobre qué funciona</h3>
         <p>No hay forma de saber cuántas personas consultaron, cuántas visitaron el gym ni cuántas terminaron inscribiéndose. Sin esos números, es imposible saber qué mejorar.</p>
       </div>
-
       <div class="card">
         <div class="icon">📣</div>
         <h3>Sin captación activa desde anuncios</h3>
         <p>Sin publicidad paga, el alcance está limitado a la audiencia que ya existe. No hay forma de atraer socios nuevos de forma sistemática más allá de los seguidores actuales.</p>
       </div>
-
       <div class="card">
         <div class="icon">🎯</div>
         <h3>Inversión en contenido sin resultados medibles</h3>
         <p>El costo de producir posteos para Instagram existe, pero sus resultados son invisibles. No hay forma de medir qué genera socios y qué no.</p>
       </div>
-
     </div>
   </div>
 </section>
@@ -481,7 +505,7 @@
     </div>
 
     <div class="tabla-wrap rv">
-      <table>
+      <table id="tabla-datos">
         <thead>
           <tr>
             <th>Qué se mide y con qué herramienta</th>
@@ -489,6 +513,7 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Filas visibles por defecto (5) -->
           <tr>
             <td><span class="tag tag-meta">Meta Ads</span><br>Alcance y rendimiento de anuncios</td>
             <td>Saber cuántas personas vieron cada anuncio, cuántas hicieron clic y cuánto costó cada resultado. Permite pausar lo que no funciona y concentrar el presupuesto en lo que trae socios.</td>
@@ -506,52 +531,58 @@
             <td>Registra dónde hacen clic, hasta dónde hacen scroll y dónde abandonan. Muestra exactamente qué frena a un interesado antes de completar el formulario.</td>
           </tr>
           <tr>
-            <td><span class="tag tag-google">SEO</span><br>Posicionamiento en buscadores</td>
-            <td>Hace que Energym aparezca cuando alguien busca "gimnasio en Marindia" en Google. Más posicionamiento significa más visitas orgánicas sin pagar por anuncios.</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-google">AEO</span><br>Visibilidad en búsquedas de IA</td>
-            <td>Optimiza el contenido para que cuando alguien le pregunte a ChatGPT o Perplexity "¿dónde hay un gimnasio en Marindia?", Energym aparezca como respuesta. El SEO de la nueva era.</td>
-          </tr>
-          <tr>
             <td><span class="tag tag-crm">CRM</span><br>Estado de cada lead</td>
             <td>Registra en qué etapa está cada interesado: consultó → agendó → visitó → se inscribió. Permite actuar a tiempo sobre quienes se quedaron a mitad de camino.</td>
           </tr>
-          <tr>
+          <!-- Filas ocultas (10) -->
+          <tr class="tabla-oculta">
+            <td><span class="tag tag-google">SEO</span><br>Posicionamiento en buscadores</td>
+            <td>Hace que Energym aparezca cuando alguien busca "gimnasio en Marindia" en Google. Más posicionamiento significa más visitas orgánicas sin pagar por anuncios.</td>
+          </tr>
+          <tr class="tabla-oculta">
+            <td><span class="tag tag-google">AEO</span><br>Visibilidad en búsquedas de IA</td>
+            <td>Optimiza el contenido para que cuando alguien le pregunte a ChatGPT o Perplexity "¿dónde hay un gimnasio en Marindia?", Energym aparezca como respuesta. El SEO de la nueva era.</td>
+          </tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-crm">CRM</span><br>Tasa de conversión por etapa</td>
             <td>Detecta en qué paso exacto se pierde la mayoría para actuar sobre ese punto específico y mejorar el proceso.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-crm">CRM</span><br>Tiempo promedio entre etapas</td>
             <td>Cuántos días pasan entre la consulta y la visita, o entre la visita y la inscripción. Si ese tiempo es largo, algo en el proceso está frenando la decisión.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-crm">CRM</span><br>Plan elegido y objetivo del socio</td>
             <td>Saber qué planes se venden más y qué perfil convierte mejor. Define hacia quién apuntar con los anuncios y cómo ajustar la oferta.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-crm">CRM</span><br>Tasa de retención de socios</td>
             <td>Cuántos socios renuevan vs. cuántos se van. Un socio que se queda vale más que uno que entra y sale — y la retención también se mejora con datos.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-crm">CRM</span><br>Costo real por socio nuevo</td>
             <td>Suma pauta + gestión + producción y lo divide entre inscriptos. El número más importante para saber si el sistema es rentable y cuánto se puede escalar.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-futuro">Futuro</span><br>Preguntas frecuentes del chatbot</td>
             <td>Registra qué preguntan los interesados antes de inscribirse. Esa información mejora la página, los anuncios y la atención presencial.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-futuro">Futuro</span><br>Encuestas de satisfacción</td>
             <td>Captura por qué eligieron Energym, qué los frenó y por qué se van los que no renuevan. Alimenta decisiones sobre precios, servicios y comunicación.</td>
           </tr>
-          <tr>
+          <tr class="tabla-oculta">
             <td><span class="tag tag-futuro">Futuro</span><br>Email marketing</td>
             <td>Comunicación directa con socios e interesados. Todo medible: tasa de apertura, clics y conversiones por campaña.</td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <button class="btn-expandir" id="btn-tabla" onclick="toggleTabla()">
+      <span class="texto">Ver todas las métricas (10 más)</span>
+      <span class="chevron">▾</span>
+    </button>
 
     <div class="dato-cierre rv">
       Cada herramienta mide una parte. El sistema de Energym conecta todas esas partes — y es en ese cruce donde aparecen los insights que realmente cambian las decisiones.
@@ -754,10 +785,23 @@
 </a>
 
 <script>
+  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+  // Tabla contraíble
+  function toggleTabla() {
+    const filas = document.querySelectorAll('.tabla-oculta');
+    const btn = document.getElementById('btn-tabla');
+    const texto = btn.querySelector('.texto');
+    const abierto = btn.classList.contains('abierto');
+
+    filas.forEach(f => f.classList.toggle('visible', !abierto));
+    btn.classList.toggle('abierto', !abierto);
+    texto.textContent = abierto ? 'Ver todas las métricas (10 más)' : 'Ocultar métricas adicionales';
+  }
 </script>
 </body>
 </html>
