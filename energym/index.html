@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energym × Blue-IA — Sistema de Captación 90 días</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #3b82f6; --blue-hover: #2563eb; --blue-dark: #1e3a5f;
+      --accent: #60a5fa; --success: #22c55e;
+      --bg: #0d1117; --surface: #161b22; --surface2: #1c2230;
+      --border: #2a3348; --text: #e6edf3; --muted: #8b949e;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 64px;
+      background: rgba(13,17,23,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav img.logo { height: 36px; }
+    nav a.cta-nav {
+      background: var(--blue); color: #fff; font-size: .875rem; font-weight: 600;
+      padding: .5rem 1.25rem; border-radius: 8px; text-decoration: none; transition: background .2s;
+    }
+    nav a.cta-nav:hover { background: var(--blue-hover); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 96px 2rem 4rem; max-width: 1200px; margin: 0 auto; gap: 3rem;
+    }
+    .hero-text { flex: 1; }
+    .eyebrow { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; }
+    .eyebrow img { height: 28px; }
+    .eyebrow span { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+    #hero h1 {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.15; color: #fff; margin-bottom: 1.25rem;
+    }
+    #hero h1 em { color: var(--accent); font-style: italic; }
+    .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin-bottom: 2rem; line-height: 1.7; }
+    .hero-bullets { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: .75rem; }
+    .hero-bullets li { display: flex; align-items: flex-start; gap: .6rem; color: var(--text); font-size: .95rem; }
+    .hero-bullets li::before { content: "✓"; color: var(--success); font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff; font-weight: 700; font-size: 1rem;
+      padding: .85rem 2rem; border-radius: 10px; text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--blue-hover); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--accent); font-weight: 600; font-size: 1rem;
+      padding: .85rem 2rem; border-radius: 10px; text-decoration: none;
+      border: 1.5px solid var(--border); transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+    .hero-visual { flex-shrink: 0; }
+
+    /* ROBOT — scale calibrado para mostrar ojos */
+    .hero-visual .robot-wrap {
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: 0 0 60px rgba(59,130,246,.25);
+    }
+    .hero-visual .robot-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.3);
+      transform-origin: center 40%;
+      display: block;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: .75rem; }
+    h2 {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem); color: #fff; line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-intro { color: var(--muted); font-size: 1.05rem; max-width: 660px; line-height: 1.75; margin-bottom: 3rem; }
+
+    /* CARDS */
+    .cards-grid { display: grid; gap: 1.5rem; }
+    .cards-grid.col2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .cards-grid.col3n { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+    .card { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; }
+    .card .icon { font-size: 1.6rem; margin-bottom: .75rem; }
+    .card h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .card p { color: var(--muted); font-size: .9rem; line-height: 1.65; }
+
+    /* DIAGNÓSTICO */
+    #diagnostico { background: var(--surface); }
+
+    /* BRECHA */
+    #brecha { background: var(--bg); }
+    .brecha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .brecha-col { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
+    .brecha-col.hoy { border-color: #ef4444; }
+    .brecha-col.futuro { border-color: var(--success); }
+    .brecha-col .col-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 1.25rem; }
+    .brecha-col.hoy .col-title { color: #ef4444; }
+    .brecha-col.futuro .col-title { color: var(--success); }
+    .brecha-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .brecha-list li { display: flex; gap: .6rem; align-items: flex-start; font-size: .92rem; color: var(--muted); }
+    .brecha-list li .icon { flex-shrink: 0; }
+
+    /* RUTA */
+    #ruta { background: var(--surface); }
+    .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+    .step { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--blue-dark);
+      border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--blue); font-size: .95rem; flex-shrink: 0;
+    }
+    .step-body h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+    .step-body p { color: var(--muted); font-size: .9rem; }
+
+    /* SISTEMA */
+    #sistema { background: var(--bg); }
+    .num-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; }
+    .num-card .num { font-size: 2rem; font-weight: 800; color: var(--blue); margin-bottom: .5rem; font-family: 'Instrument Serif', serif; }
+    .num-card h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .num-card p { color: var(--muted); font-size: .88rem; line-height: 1.6; }
+
+    /* CULTURA DEL DATO */
+    #datos { background: var(--surface); }
+    .dato-intro {
+      background: var(--surface2); border-left: 4px solid var(--blue);
+      border-radius: 0 12px 12px 0; padding: 1.5rem 2rem;
+      color: var(--muted); font-size: 1rem; line-height: 1.75;
+      margin-bottom: 2.5rem; max-width: 800px;
+    }
+    .dato-intro strong { color: var(--text); }
+    .tabla-wrap { overflow-x: auto; margin-bottom: 1.75rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    thead tr { background: var(--blue-dark); }
+    thead th { padding: .9rem 1.1rem; text-align: left; color: var(--accent); font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:hover { background: var(--surface2); }
+    tbody td { padding: .85rem 1.1rem; vertical-align: top; line-height: 1.55; }
+    tbody td:first-child { color: var(--text); font-weight: 600; width: 38%; }
+    tbody td:last-child { color: var(--muted); }
+    .tag {
+      display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; padding: .15rem .55rem; border-radius: 20px; margin-bottom: .35rem;
+    }
+    .tag-meta { background: #1e2d4a; color: #60a5fa; }
+    .tag-google { background: #1a2e1a; color: #4ade80; }
+    .tag-crm { background: #2d1e3a; color: #c084fc; }
+    .tag-futuro { background: #2a2318; color: #fbbf24; }
+    .dato-cierre {
+      background: linear-gradient(135deg, var(--blue-dark), #1c2a40);
+      border: 1px solid var(--blue); border-radius: 12px;
+      padding: 1.25rem 1.75rem; color: var(--accent); font-size: .95rem;
+      font-style: italic; line-height: 1.7;
+    }
+
+    /* FASES */
+    #fases { background: var(--bg); }
+    .fases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .fase-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
+    .fase-card .fase-badge {
+      display: inline-block; background: var(--blue-dark); color: var(--accent);
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem;
+    }
+    .fase-card h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .75rem; }
+    .fase-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .fase-list li { font-size: .88rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
+    .fase-list li::before { content: "→"; position: absolute; left: 0; color: var(--blue); }
+
+    /* INVERSIÓN */
+    #inversion { background: var(--surface); }
+    .precio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .precio-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; }
+    .precio-card .etiqueta { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .5rem; }
+    .precio-card .monto { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: .25rem; }
+    .precio-card .desc { font-size: .85rem; color: var(--muted); }
+    .precio-total {
+      background: linear-gradient(135deg, var(--blue-dark), #1c2a40);
+      border: 1px solid var(--blue); border-radius: 14px; padding: 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .precio-total .label { font-size: 1rem; color: var(--muted); }
+    .precio-total .total { font-size: 2.2rem; font-weight: 800; color: #fff; }
+    .precio-total .nota { font-size: .8rem; color: var(--accent); }
+
+    /* META 300 */
+    #meta { background: var(--bg); text-align: center; }
+    .meta-numero {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(5rem, 15vw, 10rem); font-weight: 700;
+      color: var(--blue); line-height: 1; margin: 1rem 0;
+    }
+    .meta-aclaracion {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.75rem;
+      max-width: 680px; margin: 1.5rem auto 2rem;
+      color: var(--muted); font-size: .9rem; line-height: 1.7; text-align: left;
+    }
+    .meta-aclaracion strong { color: var(--text); }
+    .funnel { display: flex; justify-content: center; gap: 0; margin-top: 2rem; flex-wrap: wrap; }
+    .funnel-step { background: var(--surface2); border: 1px solid var(--border); padding: 1.25rem 2rem; text-align: center; position: relative; }
+    .funnel-step:not(:last-child)::after {
+      content: "▶"; position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+      color: var(--blue); font-size: .85rem; z-index: 1;
+    }
+    .funnel-step .f-num { font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .funnel-step .f-label { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+    .funnel-nota { color: var(--muted); font-size: .8rem; font-style: italic; margin-top: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+    /* QUIÉN */
+    #quien { background: var(--surface); }
+    .quien-grid { display: grid; grid-template-columns: auto 1fr; gap: 3rem; align-items: start; }
+    .quien-foto img { width: 200px; height: 200px; object-fit: cover; border-radius: 16px; border: 2px solid var(--border); }
+    .quien-bio h3 { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: .25rem; }
+    .quien-bio .rol { color: var(--accent); font-size: .9rem; margin-bottom: 1rem; }
+    .quien-bio p { color: var(--muted); font-size: .93rem; line-height: 1.75; margin-bottom: 1rem; }
+    .stats-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: .75rem 1.25rem; }
+    .stat .s-num { font-size: 1.4rem; font-weight: 800; color: var(--blue); }
+    .stat .s-label { font-size: .75rem; color: var(--muted); }
+
+    /* EXTENSIÓN */
+    #extension { background: var(--bg); }
+    .ext-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .ext-card h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+    .ext-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .ext-list li { font-size: .9rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
+    .ext-list li::before { content: "✦"; position: absolute; left: 0; color: var(--accent); font-size: .7rem; }
+
+    /* CTA FINAL */
+    #cta-final { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--bg) 100%); text-align: center; padding: 7rem 2rem; }
+    #cta-final h2 { margin-bottom: 1rem; }
+    #cta-final p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 2.5rem; }
+    .cta-final-btns { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+
+    /* WHATSAPP */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,.4); text-decoration: none; transition: transform .2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* SCROLL REVEAL */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .rv.vis { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      #hero { flex-direction: column; text-align: center; padding-top: 100px; }
+      .hero-sub { margin: 0 auto 1.75rem; }
+      .hero-ctas { justify-content: center; }
+      .brecha-grid { grid-template-columns: 1fr; }
+      .quien-grid { grid-template-columns: 1fr; }
+      .quien-foto { text-align: center; }
+      .ext-card { grid-template-columns: 1fr; }
+      .funnel { flex-direction: column; align-items: center; }
+      .funnel-step::after { display: none; }
+      table { font-size: .8rem; }
+      .hero-visual .robot-wrap { width: 200px; height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="../logo.gif" alt="Blue-IA" class="logo" />
+  <a href="https://cal.com/adrian-mariotti-4kevwu/demo-blue-ia-energym" target="_blank" class="cta-nav">Reservar reunión →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text rv">
+    <div class="eyebrow">
+      <img src="../Energym.png" alt="Energym" />
+      <span>Sistema de captación · Piloto 90 días</span>
+    </div>
+    <h1>De consultas sueltas<br>a <em>socios reales,</em><br>con números claros.</h1>
+    <p class="hero-sub">
+      Un sistema completo para Energym: anuncios en Meta, seguimiento de cada consulta y un panel donde se ve qué genera resultados y qué no.
+    </p>
+    <ul class="hero-bullets">
+      <li>Más socios nuevos desde anuncios en Meta</li>
+      <li>Menos consultas perdidas — cada interesado queda registrado</li>
+      <li>Un panel simple con los números que importan para decidir</li>
+    </ul>
+    <div class="hero-ctas">
+      <a href="https://cal.com/adrian-mariotti-4kevwu/demo-blue-ia-energym" target="_blank" class="btn-primary">Reservar reunión presencial →</a>
+      <a href="https://wa.me/59891979237" target="_blank" class="btn-secondary">WhatsApp directo</a>
+    </div>
+  </div>
+  <div class="hero-visual rv">
+    <div class="robot-wrap">
+      <video autoplay loop muted playsinline>
+        <source src="../robot.webm" type="video/webm" />
+        <source src="../robot.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section id="diagnostico">
+  <div class="inner">
+    <p class="section-label">Diagnóstico</p>
+    <h2>Lo que está pasando hoy en Energym</h2>
+    <p class="section-intro">Cuatro problemas concretos que frenan el crecimiento. El sistema existe para resolverlos uno por uno.</p>
+    <div class="cards-grid col2 rv">
+
+      <div class="card">
+        <div class="icon">💬</div>
+        <h3>Las consultas llegan pero no convierten</h3>
+        <p>Las consultas llegan por WhatsApp e Instagram, pero muchas se quedan en el camino sin convertir. Sin un proceso claro, cada consulta perdida es un socio que no entró.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Sin visibilidad sobre qué funciona</h3>
+        <p>No hay forma de saber cuántas personas consultaron, cuántas visitaron el gym ni cuántas terminaron inscribiéndose. Sin esos números, es imposible saber qué mejorar.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📣</div>
+        <h3>Sin captación activa desde anuncios</h3>
+        <p>Sin publicidad paga, el alcance está limitado a la audiencia que ya existe. No hay forma de atraer socios nuevos de forma sistemática más allá de los seguidores actuales.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Inversión en contenido sin resultados medibles</h3>
+        <p>El costo de producir posteos para Instagram existe, pero sus resultados son invisibles. No hay forma de medir qué genera socios y qué no.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LA BRECHA -->
+<section id="brecha">
+  <div class="inner">
+    <p class="section-label">La Brecha</p>
+    <h2>Dónde está Energym hoy — y adónde llega en 90 días</h2>
+    <p class="section-intro">El sistema cierra esa distancia en tres meses. Cada columna representa una realidad concreta, antes y después.</p>
+    <div class="brecha-grid rv">
+      <div class="brecha-col hoy">
+        <div class="col-title">❌ Hoy</div>
+        <ul class="brecha-list">
+          <li><span class="icon">❌</span> Las consultas llegan por WhatsApp e Instagram, pero muchas se quedan en el camino sin convertir</li>
+          <li><span class="icon">❌</span> Sin publicidad paga, el alcance está limitado a la audiencia que ya existe — no hay captación activa hacia afuera</li>
+          <li><span class="icon">❌</span> El costo de producir posteos para Instagram existe, pero sus resultados son invisibles — no hay forma de medir qué genera y qué no</li>
+          <li><span class="icon">❌</span> No se sabe el costo real de conseguir un socio nuevo</li>
+          <li><span class="icon">❌</span> La captación depende del boca a boca — valiosa, pero no escalable</li>
+        </ul>
+      </div>
+      <div class="brecha-col futuro">
+        <div class="col-title">✅ A los 90 días</div>
+        <ul class="brecha-list">
+          <li><span class="icon">✅</span> Cada consulta queda registrada con nombre, contacto y origen</li>
+          <li><span class="icon">✅</span> Un panel muestra consultas, visitas e inscripciones en tiempo real</li>
+          <li><span class="icon">✅</span> Los anuncios en Meta están conectados a resultados reales y medibles</li>
+          <li><span class="icon">✅</span> Se sabe exactamente cuánto cuesta cada socio nuevo</li>
+          <li><span class="icon">✅</span> El sistema trabaja solo — con o sin Energym frente a la pantalla</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="ruta">
+  <div class="inner">
+    <p class="section-label">Cómo funciona</p>
+    <h2>Del primer contacto al socio inscripto</h2>
+    <p class="section-intro">Cinco pasos que llevan a alguien que ve un anuncio a convertirse en socio de Energym.</p>
+    <div class="steps rv">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Anuncio en Meta</h3>
+          <p>Una persona ve el anuncio en Instagram o Facebook, segmentado por zona, edad e interés. Es el primer contacto real con Energym.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Página de captación</h3>
+          <p>Hace clic y llega a una página diseñada para convertir. Deja su nombre, contacto y objetivo — bajar de peso, ganar masa, recuperación. Todo queda registrado automáticamente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Registro y confirmación automática</h3>
+          <p>El interesado recibe un email confirmando que su consulta llegó. Energym recibe una notificación al instante. Sin demoras ni pasos manuales.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Seguimiento con estado claro</h3>
+          <p>En el panel, cada persona tiene un estado: consultó → agendó visita → visitó → se inscribió. En todo momento se sabe en qué punto está cada interesado.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Nuevo socio + datos para optimizar</h3>
+          <p>La inscripción queda registrada con el plan elegido y el anuncio de origen. Con esa información, los anuncios se optimizan solos para traer más personas con el mismo perfil.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMA NIVEL 2 -->
+<section id="sistema">
+  <div class="inner">
+    <p class="section-label">El Sistema Nivel 2</p>
+    <h2>Qué incluye cada pieza del sistema</h2>
+    <p class="section-intro">Seis componentes que trabajan juntos. Cada uno tiene una función específica — ninguno es decorativo.</p>
+    <div class="cards-grid col3n rv">
+      <div class="num-card">
+        <div class="num">01</div>
+        <h3>Página de captación</h3>
+        <p>Diseñada y construida para Energym. Cuando alguien deja sus datos, quedan registrados automáticamente: nombre, contacto, objetivo y anuncio de origen.</p>
+      </div>
+      <div class="num-card">
+        <div class="num">02</div>
+        <h3>Registro de contactos (CRM)</h3>
+        <p>Un sistema propio donde queda toda la información de quienes consultan y de los socios actuales, con estado claro en cada etapa del proceso.</p>
+      </div>
+      <div class="num-card">
+        <div class="num">03</div>
+        <h3>Panel de control</h3>
+        <p>Un panel privado, solo para Energym. De un vistazo: cuántas personas consultaron, visitaron, se inscribieron y desde qué anuncio llegaron.</p>
+      </div>
+      <div class="num-card">
+        <div class="num">04</div>
+        <h3>Sistema de medición</h3>
+        <p>Google Analytics 4 para el comportamiento en la página. Microsoft Clarity para ver cómo interactúan los visitantes. Meta Pixel para conectar cada acción con la campaña.</p>
+      </div>
+      <div class="num-card">
+        <div class="num">05</div>
+        <h3>Campañas en Meta</h3>
+        <p>Segmentación, audiencias, creatividades y 3 a 5 anuncios iniciales. Los videos los graba el equipo de Energym desde el gym — con directrices claras. Los ajustes son remotos.</p>
+      </div>
+      <div class="num-card">
+        <div class="num">06</div>
+        <h3>Comunicaciones automáticas</h3>
+        <p>El interesado recibe confirmación inmediata. Energym recibe aviso de cada nuevo contacto. Todo sin intervención manual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURA DEL DATO -->
+<section id="datos">
+  <div class="inner">
+    <p class="section-label">La cultura del dato</p>
+    <h2>Lo que no se mide, no se puede cambiar</h2>
+    <div class="dato-intro rv">
+      Todas las empresas que trabajan con Blue-IA comparten un punto de partida: entender que los datos no son un tecnicismo — son la base de cualquier decisión inteligente. El sistema que se construye para Energym no solo capta socios: <strong>crea una cultura del dato que permite modificar, mejorar y escalar el negocio con el tiempo.</strong> Lo medible puede mejorarse. Lo invisible, no.
+    </div>
+
+    <div class="tabla-wrap rv">
+      <table>
+        <thead>
+          <tr>
+            <th>Qué se mide y con qué herramienta</th>
+            <th>Para qué sirve en concreto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-meta">Meta Ads</span><br>Alcance y rendimiento de anuncios</td>
+            <td>Saber cuántas personas vieron cada anuncio, cuántas hicieron clic y cuánto costó cada resultado. Permite pausar lo que no funciona y concentrar el presupuesto en lo que trae socios.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-meta">Meta Pixel</span><br>Conversiones desde anuncios</td>
+            <td>Conecta cada consulta o inscripción con el anuncio que la generó. El algoritmo aprende qué perfiles convierten mejor y mejora la entrega automáticamente.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-google">Google Analytics 4</span><br>Comportamiento en la página</td>
+            <td>Muestra cuántas personas entran, cuánto tiempo se quedan y cuántas completan el formulario. Permite detectar si la página convierte bien o necesita ajustes.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-google">Microsoft Clarity</span><br>Mapas de calor y sesiones</td>
+            <td>Registra dónde hacen clic, hasta dónde hacen scroll y dónde abandonan. Muestra exactamente qué frena a un interesado antes de completar el formulario.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-google">SEO</span><br>Posicionamiento en buscadores</td>
+            <td>Hace que Energym aparezca cuando alguien busca "gimnasio en Marindia" en Google. Más posicionamiento significa más visitas orgánicas sin pagar por anuncios.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-google">AEO</span><br>Visibilidad en búsquedas de IA</td>
+            <td>Optimiza el contenido para que cuando alguien le pregunte a ChatGPT o Perplexity "¿dónde hay un gimnasio en Marindia?", Energym aparezca como respuesta. El SEO de la nueva era.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Estado de cada lead</td>
+            <td>Registra en qué etapa está cada interesado: consultó → agendó → visitó → se inscribió. Permite actuar a tiempo sobre quienes se quedaron a mitad de camino.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Tasa de conversión por etapa</td>
+            <td>Detecta en qué paso exacto se pierde la mayoría para actuar sobre ese punto específico y mejorar el proceso.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Tiempo promedio entre etapas</td>
+            <td>Cuántos días pasan entre la consulta y la visita, o entre la visita y la inscripción. Si ese tiempo es largo, algo en el proceso está frenando la decisión.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Plan elegido y objetivo del socio</td>
+            <td>Saber qué planes se venden más y qué perfil convierte mejor. Define hacia quién apuntar con los anuncios y cómo ajustar la oferta.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Tasa de retención de socios</td>
+            <td>Cuántos socios renuevan vs. cuántos se van. Un socio que se queda vale más que uno que entra y sale — y la retención también se mejora con datos.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-crm">CRM</span><br>Costo real por socio nuevo</td>
+            <td>Suma pauta + gestión + producción y lo divide entre inscriptos. El número más importante para saber si el sistema es rentable y cuánto se puede escalar.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-futuro">Futuro</span><br>Preguntas frecuentes del chatbot</td>
+            <td>Registra qué preguntan los interesados antes de inscribirse. Esa información mejora la página, los anuncios y la atención presencial.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-futuro">Futuro</span><br>Encuestas de satisfacción</td>
+            <td>Captura por qué eligieron Energym, qué los frenó y por qué se van los que no renuevan. Alimenta decisiones sobre precios, servicios y comunicación.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-futuro">Futuro</span><br>Email marketing</td>
+            <td>Comunicación directa con socios e interesados. Todo medible: tasa de apertura, clics y conversiones por campaña.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dato-cierre rv">
+      Cada herramienta mide una parte. El sistema de Energym conecta todas esas partes — y es en ese cruce donde aparecen los insights que realmente cambian las decisiones.
+    </div>
+  </div>
+</section>
+
+<!-- FASES -->
+<section id="fases">
+  <div class="inner">
+    <p class="section-label">El Piloto — 90 días</p>
+    <h2>Tres fases, un resultado claro</h2>
+    <p class="section-intro">El piloto está estructurado para que Energym tenga datos reales, no promesas, al final de cada fase.</p>
+    <div class="fases-grid rv">
+      <div class="fase-card">
+        <div class="fase-badge">Fase 1 · Semanas 1–4</div>
+        <h3>Diseño y armado</h3>
+        <ul class="fase-list">
+          <li>Reunión de alineación con Energym</li>
+          <li>Construcción de la página de captación</li>
+          <li>Configuración del registro y el panel</li>
+          <li>Setup de medición y correos automáticos</li>
+          <li>Lanzamiento de los primeros anuncios</li>
+        </ul>
+      </div>
+      <div class="fase-card">
+        <div class="fase-badge">Fase 2 · Semanas 4–8</div>
+        <h3>Lanzamiento y testeo</h3>
+        <ul class="fase-list">
+          <li>Arranque con presupuesto moderado</li>
+          <li>Observación de qué anuncios convierten mejor</li>
+          <li>Primeros ajustes en mensajes y audiencias</li>
+          <li>Revisión conjunta de resultados intermedios</li>
+        </ul>
+      </div>
+      <div class="fase-card">
+        <div class="fase-badge">Fase 3 · Semanas 8–12</div>
+        <h3>Optimización y consolidación</h3>
+        <ul class="fase-list">
+          <li>Foco en los 2–3 anuncios ganadores</li>
+          <li>Ajustes finos en el panel según uso real</li>
+          <li>Revisión final: consultas, visitas, inscripciones y costo por socio</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVERSIÓN -->
+<section id="inversion">
+  <div class="inner">
+    <p class="section-label">Inversión</p>
+    <h2>Transparente, sin letra chica</h2>
+    <p class="section-intro">La inversión tiene tres componentes claros. Nada está oculto — cada número tiene una justificación.</p>
+    <div class="precio-grid rv">
+      <div class="precio-card">
+        <div class="etiqueta">Sistema Energym · única vez</div>
+        <div class="monto">USD 700</div>
+        <div class="desc">Desarrollo completo de la página, registro, panel y configuración de medición.</div>
+      </div>
+      <div class="precio-card">
+        <div class="etiqueta">Mantenimiento mensual</div>
+        <div class="monto">USD 220</div>
+        <div class="desc">Hosting, monitoreo técnico y soporte continuo del sistema.</div>
+      </div>
+      <div class="precio-card">
+        <div class="etiqueta">Gestión de campañas · mes</div>
+        <div class="monto">USD 180</div>
+        <div class="desc">Optimización semanal de anuncios, reportes y ajustes de audiencia.</div>
+      </div>
+      <div class="precio-card">
+        <div class="etiqueta">Setup Meta · única vez</div>
+        <div class="monto">USD 150</div>
+        <div class="desc">Armado inicial de la estructura de campañas, pixel y audiencias.</div>
+      </div>
+    </div>
+    <div class="precio-total rv">
+      <div>
+        <div class="label">Inversión total — Mes 1</div>
+        <div class="total">USD 1.430</div>
+        <div class="nota">+ ~USD 180 de pauta en Meta (va directo a la plataforma)</div>
+      </div>
+      <div>
+        <a href="https://cal.com/adrian-mariotti-4kevwu/demo-blue-ia-energym" target="_blank" class="btn-primary">Reservar reunión presencial →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- META 300 -->
+<section id="meta">
+  <div class="inner">
+    <p class="section-label">La meta</p>
+    <h2>300 socios nuevos para Energym</h2>
+    <p style="color:var(--muted);max-width:580px;margin:0 auto 1rem;font-size:1rem;">
+      Esta es la meta que Energym se ha fijado. El sistema está diseñado para construir el camino hacia ese número, con medición real en cada etapa.
+    </p>
+    <div class="meta-numero rv">300</div>
+    <div class="meta-aclaracion rv">
+      <strong>Una aclaración importante:</strong> los 300 socios nuevos son la meta de crecimiento de Energym — no una garantía de resultado del piloto de 90 días. Los resultados dependen de múltiples factores: el presupuesto en pauta, la calidad de los anuncios, la atención al interesado y el tiempo de maduración del sistema. Blue-IA no garantiza ese número, pero sí garantiza que, por primera vez, Energym va a saber exactamente en qué punto del camino está y qué acciones concretas generan socios reales.
+    </div>
+    <div class="funnel rv">
+      <div class="funnel-step">
+        <div class="f-num">Alcance</div>
+        <div class="f-label">Personas que ven el anuncio</div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-num">Consultas</div>
+        <div class="f-label">Completan el formulario</div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-num">Visitas</div>
+        <div class="f-label">Llegan al gimnasio</div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-num">Inscriptos</div>
+        <div class="f-label">Se convierten en socios</div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-num">🎯 300</div>
+        <div class="f-label">La meta de Energym</div>
+      </div>
+    </div>
+    <p class="funnel-nota">El embudo muestra las etapas del proceso, no proyecciones garantizadas. El piloto de 90 días construye la infraestructura y genera los primeros datos reales para avanzar hacia esa meta.</p>
+  </div>
+</section>
+
+<!-- QUIÉN -->
+<section id="quien">
+  <div class="inner">
+    <p class="section-label">Quién está detrás</p>
+    <h2>Adrián Mariotti — Blue-IA</h2>
+    <div class="quien-grid rv">
+      <div class="quien-foto">
+        <img src="../FotoMariotti1.jpg" alt="Adrián Mariotti" />
+      </div>
+      <div class="quien-bio">
+        <h3>Adrián Mariotti</h3>
+        <p class="rol">Fundador de Blue-IA · IA + Marketing para negocios locales en Uruguay</p>
+        <p>Analista de Datos (UCU), Ingeniería de IA. Realizador audiovisual. Veinte años como fotoperiodista enseñan a leer situaciones rápido y a contar historias que generan confianza. Hoy aplico eso — junto con sistemas de IA y marketing digital — para que negocios como Energym crezcan con datos reales, no con suposiciones.</p>
+        <p>No soy una agencia. Soy una persona que construye el sistema, lo entrega funcionando y se queda para que genere resultados.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="s-num">20+</div><div class="s-label">años en comunicación</div></div>
+          <div class="stat"><div class="s-num">IA</div><div class="s-label">+ automatización</div></div>
+          <div class="stat"><div class="s-num">UY</div><div class="s-label">Negocios locales</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTENSIÓN -->
+<section id="extension">
+  <div class="inner">
+    <p class="section-label">Extensión opcional — Nivel 3</p>
+    <h2>El siguiente paso natural</h2>
+    <p class="section-intro">Una vez que el sistema de captación está funcionando, se puede sumar un asistente virtual que atiende las 24 horas en la web de Energym.</p>
+    <div class="ext-card rv">
+      <div>
+        <h3>Qué hace el asistente virtual</h3>
+        <ul class="ext-list">
+          <li>Responde preguntas frecuentes: rutinas, planes, horarios, requisitos</li>
+          <li>Informa sobre suplementos y productos disponibles en Energym</li>
+          <li>Ofrece un plan de entrenamiento inicial a cambio del email del interesado</li>
+          <li>Captura nombre, contacto y objetivo de cada consulta automáticamente</li>
+          <li>Deriva al equipo de Energym cuando detecta un caso que requiere atención personal</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Por qué tiene sentido después del piloto</h3>
+        <ul class="ext-list">
+          <li>El panel ya está funcionando — el asistente alimenta los mismos datos</li>
+          <li>Cada consulta que entra a las 2 AM queda registrada para el día siguiente</li>
+          <li>Energym no pierde una sola oportunidad aunque no haya nadie disponible</li>
+          <li>El sistema aprende con cada interacción — mejora solo con el tiempo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="inner">
+    <p class="section-label">Próximo paso</p>
+    <h2>45 minutos para arrancar con claridad</h2>
+    <p>Una reunión presencial donde Energym puede ver el sistema en acción, hacer todas las preguntas y decidir con información completa.</p>
+    <div class="cta-final-btns">
+      <a href="https://cal.com/adrian-mariotti-4kevwu/demo-blue-ia-energym" target="_blank" class="btn-primary">Reservar la reunión →</a>
+      <a href="https://wa.me/59891979237" target="_blank" class="btn-secondary">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/59891979237" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
