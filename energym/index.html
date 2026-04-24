@@ -64,10 +64,20 @@
     }
     .btn-secondary:hover { border-color: var(--accent); }
     .hero-visual { flex-shrink: 0; }
-    .hero-visual video {
-      width: 280px; height: 280px; object-fit: cover;
-      border-radius: 50%; border: 3px solid var(--border);
+
+    /* ROBOT — fix fondo azul visible */
+    .hero-visual .robot-wrap {
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: transparent;
       box-shadow: 0 0 60px rgba(59,130,246,.25);
+    }
+    .hero-visual .robot-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.85);
+      display: block;
     }
 
     /* SECTIONS */
@@ -263,6 +273,7 @@
       .funnel { flex-direction: column; align-items: center; }
       .funnel-step::after { display: none; }
       table { font-size: .8rem; }
+      .hero-visual .robot-wrap { width: 200px; height: 200px; }
     }
   </style>
 </head>
@@ -296,10 +307,12 @@
     </div>
   </div>
   <div class="hero-visual rv">
-    <video width="280" height="280" autoplay loop muted playsinline>
-      <source src="../robot.webm" type="video/webm" />
-      <source src="../robot.mp4" type="video/mp4" />
-    </video>
+    <div class="robot-wrap">
+      <video autoplay loop muted playsinline>
+        <source src="../robot.webm" type="video/webm" />
+        <source src="../robot.mp4" type="video/mp4" />
+      </video>
+    </div>
   </div>
 </section>
 
