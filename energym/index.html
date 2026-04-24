@@ -26,7 +26,8 @@
       background: rgba(13,17,23,.92); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    nav img.logo { height: 36px; }
+    nav a.logo-link { display: flex; align-items: center; }
+    nav a.logo-link img { height: 36px; }
     nav a.cta-nav {
       background: var(--blue); color: #fff; font-size: .875rem; font-weight: 600;
       padding: .5rem 1.25rem; border-radius: 8px; text-decoration: none; transition: background .2s;
@@ -163,11 +164,9 @@
     .tag-crm { background: #2d1e3a; color: #c084fc; }
     .tag-futuro { background: #2a2318; color: #fbbf24; }
 
-    /* Filas ocultas de la tabla */
     tr.tabla-oculta { display: none; }
     tr.tabla-oculta.visible { display: table-row; }
 
-    /* Botón expandir tabla */
     .btn-expandir {
       display: flex; align-items: center; gap: .5rem;
       background: var(--surface2); border: 1px solid var(--border);
@@ -294,16 +293,8 @@
       .funnel-step::after { display: none; }
       table { font-size: .8rem; }
       .hero-visual .robot-wrap { width: 200px; height: 200px; }
-
-      /* FIX botón precio-total en mobile */
-      .precio-total {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .precio-total .btn-primary {
-        width: 100%;
-        text-align: center;
-      }
+      .precio-total { flex-direction: column; align-items: flex-start; }
+      .precio-total .btn-primary { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -311,7 +302,7 @@
 
 <!-- NAV -->
 <nav>
-  <img src="../logo.gif" alt="Blue-IA" class="logo" />
+  <a href="#hero" class="logo-link"><img src="../logo.gif" alt="Blue-IA" /></a>
   <a href="https://cal.com/adrian-mariotti-4kevwu/demo-blue-ia-energym" target="_blank" class="cta-nav">Reservar reunión →</a>
 </nav>
 
@@ -503,7 +494,6 @@
     <div class="dato-intro rv">
       Todas las empresas que trabajan con Blue-IA comparten un punto de partida: entender que los datos no son un tecnicismo — son la base de cualquier decisión inteligente. El sistema que se construye para Energym no solo capta socios: <strong>crea una cultura del dato que permite modificar, mejorar y escalar el negocio con el tiempo.</strong> Lo medible puede mejorarse. Lo invisible, no.
     </div>
-
     <div class="tabla-wrap rv">
       <table id="tabla-datos">
         <thead>
@@ -513,7 +503,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Filas visibles por defecto (5) -->
           <tr>
             <td><span class="tag tag-meta">Meta Ads</span><br>Alcance y rendimiento de anuncios</td>
             <td>Saber cuántas personas vieron cada anuncio, cuántas hicieron clic y cuánto costó cada resultado. Permite pausar lo que no funciona y concentrar el presupuesto en lo que trae socios.</td>
@@ -534,7 +523,6 @@
             <td><span class="tag tag-crm">CRM</span><br>Estado de cada lead</td>
             <td>Registra en qué etapa está cada interesado: consultó → agendó → visitó → se inscribió. Permite actuar a tiempo sobre quienes se quedaron a mitad de camino.</td>
           </tr>
-          <!-- Filas ocultas (10) -->
           <tr class="tabla-oculta">
             <td><span class="tag tag-google">SEO</span><br>Posicionamiento en buscadores</td>
             <td>Hace que Energym aparezca cuando alguien busca "gimnasio en Marindia" en Google. Más posicionamiento significa más visitas orgánicas sin pagar por anuncios.</td>
@@ -578,12 +566,10 @@
         </tbody>
       </table>
     </div>
-
     <button class="btn-expandir" id="btn-tabla" onclick="toggleTabla()">
       <span class="texto">Ver todas las métricas (10 más)</span>
       <span class="chevron">▾</span>
     </button>
-
     <div class="dato-cierre rv">
       Cada herramienta mide una parte. El sistema de Energym conecta todas esas partes — y es en ese cruce donde aparecen los insights que realmente cambian las decisiones.
     </div>
@@ -714,7 +700,6 @@
 <section id="quien">
   <div class="inner">
     <p class="section-label">Quién está detrás</p>
-    <h2>Adrián Mariotti — Blue-IA</h2>
     <div class="quien-grid rv">
       <div class="quien-foto">
         <img src="../FotoMariotti1.jpg" alt="Adrián Mariotti" />
@@ -785,19 +770,16 @@
 </a>
 
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 
-  // Tabla contraíble
   function toggleTabla() {
     const filas = document.querySelectorAll('.tabla-oculta');
     const btn = document.getElementById('btn-tabla');
     const texto = btn.querySelector('.texto');
     const abierto = btn.classList.contains('abierto');
-
     filas.forEach(f => f.classList.toggle('visible', !abierto));
     btn.classList.toggle('abierto', !abierto);
     texto.textContent = abierto ? 'Ver todas las métricas (10 más)' : 'Ocultar métricas adicionales';
