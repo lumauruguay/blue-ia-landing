@@ -142,13 +142,21 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));}
 .plan-name{font-family:var(--font-display);font-size:var(--text-xl);color:var(--text);margin-bottom:var(--space-3);}
 .plan-desc{font-size:var(--text-sm);color:var(--muted);line-height:1.6;}
 
+/* PRICING BLOCK */
 .plan-pricing{padding:var(--space-4) var(--space-8);background:var(--surface-offset);border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);}
-.pr-row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);padding:var(--space-2) 0;}
-.pr-row + .pr-row{border-top:1px solid var(--divider);}
-.pr-label{font-size:var(--text-xs);color:var(--muted);}
-.pr-val{font-family:var(--font-display);font-size:var(--text-lg);color:var(--accent);white-space:nowrap;}
-.pr-val small{font-family:var(--font-body);font-size:var(--text-xs);color:var(--faint);}
-.pr-sub{font-size:var(--text-xs);color:var(--faint);margin-top:2px;}
+
+/* Fila setup: en segundo plano */
+.pr-row-setup{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-2) 0 var(--space-3);border-bottom:1px solid var(--divider);margin-bottom:var(--space-3);}
+.pr-setup-label{font-size:var(--text-xs);color:var(--faint);}
+.pr-setup-val{font-size:var(--text-xs);color:var(--faint);text-align:right;line-height:1.5;}
+
+/* Fila mantenimiento: protagonista */
+.pr-row-main{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);padding:var(--space-1) 0;}
+.pr-main-label{}
+.pr-main-label strong{display:block;font-size:var(--text-xs);font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;}
+.pr-main-label span{font-size:var(--text-xs);color:var(--muted);}
+.pr-val{font-family:var(--font-display);font-size:var(--text-xl);color:var(--accent);white-space:nowrap;line-height:1;}
+.pr-val small{font-family:var(--font-body);font-size:var(--text-xs);color:var(--muted);}
 
 .plan-feats{padding:var(--space-6) var(--space-8);display:flex;flex-direction:column;gap:var(--space-3);flex:1;}
 .feat-item{display:flex;gap:var(--space-3);align-items:flex-start;font-size:var(--text-sm);}
@@ -423,6 +431,7 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
 
     <div class="plans-grid r">
 
+      <!-- ESENCIAL -->
       <div class="plan-card">
         <div class="plan-head">
           <div class="plan-tier">Plan 01</div>
@@ -430,24 +439,16 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
           <div class="plan-desc">Para comenzar: diagnóstico real, presencia digital activa y automatización de lo más urgente.</div>
         </div>
         <div class="plan-pricing">
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Desarrollo inicial (setup)</div>
-              <div class="pr-sub">3 cuotas de igual valor</div>
-            </div>
-            <div style="text-align:right">
-              <div class="pr-val">$60.000 <small>UYU</small></div>
-              <div class="pr-sub">3 × $20.000</div>
-            </div>
+          <div class="pr-row-setup">
+            <div class="pr-setup-label">Setup · 3 cuotas de $20.000</div>
+            <div class="pr-setup-val">$60.000 UYU</div>
           </div>
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Mantenimiento mensual</div>
-              <div class="pr-sub">Desde el mes 4</div>
+          <div class="pr-row-main">
+            <div class="pr-main-label">
+              <strong>Mensual</strong>
+              <span>Desde el mes 4</span>
             </div>
-            <div style="text-align:right">
-              <div class="pr-val">$20.000 <small>UYU/mes</small></div>
-            </div>
+            <div class="pr-val">$20.000 <small>UYU/mes</small></div>
           </div>
         </div>
         <div class="plan-feats">
@@ -468,6 +469,7 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
         </div>
       </div>
 
+      <!-- CRECIMIENTO -->
       <div class="plan-card featured">
         <div class="plan-badge">⭐ Más recomendado</div>
         <div class="plan-head">
@@ -476,24 +478,16 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
           <div class="plan-desc">El sistema completo de captación y fidelización, más automatización de gestión interna.</div>
         </div>
         <div class="plan-pricing">
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Desarrollo inicial (setup)</div>
-              <div class="pr-sub">3 cuotas de igual valor</div>
-            </div>
-            <div style="text-align:right">
-              <div class="pr-val">$129.000 <small>UYU</small></div>
-              <div class="pr-sub">3 × $43.000</div>
-            </div>
+          <div class="pr-row-setup">
+            <div class="pr-setup-label">Setup · 3 cuotas de $43.000</div>
+            <div class="pr-setup-val">$129.000 UYU</div>
           </div>
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Mantenimiento mensual</div>
-              <div class="pr-sub">Desde el mes 4</div>
+          <div class="pr-row-main">
+            <div class="pr-main-label">
+              <strong>Mensual</strong>
+              <span>Desde el mes 4</span>
             </div>
-            <div style="text-align:right">
-              <div class="pr-val">$43.000 <small>UYU/mes</small></div>
-            </div>
+            <div class="pr-val">$43.000 <small>UYU/mes</small></div>
           </div>
         </div>
         <div class="plan-feats">
@@ -514,6 +508,7 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
         </div>
       </div>
 
+      <!-- TOTAL -->
       <div class="plan-card">
         <div class="plan-head">
           <div class="plan-tier">Plan 03</div>
@@ -521,24 +516,16 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
           <div class="plan-desc">La ACS como organización moderna: datos propios, revista sectorial y capacidad real de escalar.</div>
         </div>
         <div class="plan-pricing">
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Desarrollo inicial (setup)</div>
-              <div class="pr-sub">3 cuotas de igual valor</div>
-            </div>
-            <div style="text-align:right">
-              <div class="pr-val">$195.000 <small>UYU</small></div>
-              <div class="pr-sub">3 × $65.000</div>
-            </div>
+          <div class="pr-row-setup">
+            <div class="pr-setup-label">Setup · 3 cuotas de $65.000</div>
+            <div class="pr-setup-val">$195.000 UYU</div>
           </div>
-          <div class="pr-row">
-            <div>
-              <div class="pr-label">Mantenimiento mensual</div>
-              <div class="pr-sub">Desde el mes 4</div>
+          <div class="pr-row-main">
+            <div class="pr-main-label">
+              <strong>Mensual</strong>
+              <span>Desde el mes 4</span>
             </div>
-            <div style="text-align:right">
-              <div class="pr-val">$65.000 <small>UYU/mes</small></div>
-            </div>
+            <div class="pr-val">$65.000 <small>UYU/mes</small></div>
           </div>
         </div>
         <div class="plan-feats">
@@ -648,7 +635,7 @@ footer{padding:var(--space-10) 0 var(--space-8);border-top:1px solid var(--borde
   <h2>El momento de cambiar es ahora.</h2>
   <p>La ACS tiene la historia, la confianza y la red. Blue-IA aporta las herramientas para convertir todo eso en crecimiento real para los comerciantes de la Costa de Oro.</p>
   <a href="https://wa.me/59891979237?text=Hola%20Adri%C3%A1n%2C%20quiero%20saber%20m%C3%A1s%20sobre%20la%20propuesta%20para%20la%20ACS" target="_blank" rel="noopener noreferrer" class="btn-white">
-    💬 Hablar por WhatsApp con Luma
+    💬 Hablar por WhatsApp con Adrián
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </a>
 </section>
