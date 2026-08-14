@@ -136,7 +136,7 @@
   <script>
     const WHATSAPP_NUMBER = '59891979237';
 
-    // ── DATOS ──────────────────────────────────────────────────────────────
+    // ── DATOS ─────────────────────────────────────────────────────────────
     // Para agregar un evento: copiar un objeto y cambiar sus valores.
     // Fotos van en: fotos/A/A001.jpg, fotos/A/A002.jpg, etc.
     // Los códigos (A001, A002…) se generan automáticamente.
@@ -145,8 +145,8 @@
       {
         letter: 'A',
         title: 'Recital de Cámara',
-        date: '— completar fecha —',
-        description: 'Completar con descripción del evento: lugar, intérpretes, programa.',
+        date: '12 de agosto de 2026',
+        description: 'Recital concierto de cámara en Sala Zitarrosa.',
         photos: [
           // Reemplazar con rutas reales: { src: 'fotos/A/A001.jpg' }
           { src: 'https://placehold.co/500x333/111/fff?text=A001' },
@@ -161,10 +161,7 @@
       // { letter: 'B', title: 'Nombre', date: '—', description: '...', photos: [] }
     ];
 
-    // ── Cart ───────────────────────────────────────────────────────────────
     const selected = new Set();
-
-    // ── Build UI ───────────────────────────────────────────────────────────
     const nav = document.getElementById('tab-nav');
     const mainEl = document.getElementById('main-content');
 
@@ -231,10 +228,7 @@
       if (selected.size === 0) return;
       const codes = [...selected].sort().join(', ');
       const msg = encodeURIComponent(
-        `Hola Luma, me interesan las siguientes fotos de Luma Audiovisuales:
-${codes}
-
-¿Podés darme más información sobre formatos y precios?`
+        `Hola Luma, me interesan las siguientes fotos de Luma Audiovisuales:\n${codes}\n\n¿Podés darme más información sobre formatos y precios?`
       );
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
     }
