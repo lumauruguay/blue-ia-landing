@@ -57,7 +57,7 @@
       user-select: none; -webkit-user-select: none;
     }
     .photo-item img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
       pointer-events: none; -webkit-user-drag: none;
     }
     .photo-item::before {
@@ -136,11 +136,6 @@
   <script>
     const WHATSAPP_NUMBER = '59891979237';
 
-    // ── DATOS ─────────────────────────────────────────────────────────────
-    // Para agregar un evento: copiar un objeto y cambiar sus valores.
-    // Fotos van en: fotos/A/A001.jpg, fotos/A/A002.jpg, etc.
-    // Los códigos (A001, A002…) se generan automáticamente.
-
     const events = [
       {
         letter: 'A',
@@ -148,17 +143,46 @@
         date: '12 de agosto de 2026',
         description: 'Recital concierto de cámara en Sala Zitarrosa.',
         photos: [
-          // Reemplazar con rutas reales: { src: 'fotos/A/A001.jpg' }
-          { src: 'https://placehold.co/500x333/111/fff?text=A001' },
-          { src: 'https://placehold.co/500x333/222/fff?text=A002' },
-          { src: 'https://placehold.co/500x333/333/fff?text=A003' },
-          { src: 'https://placehold.co/500x333/444/fff?text=A004' },
-          { src: 'https://placehold.co/500x333/555/fff?text=A005' },
-          { src: 'https://placehold.co/500x333/666/fff?text=A006' },
+          { src: '../A (1).JPG' },
+          { src: '../A (2).JPG' },
+          { src: '../A (3).JPG' },
+          { src: '../A (4).JPG' },
+          { src: '../A (5).JPG' },
+          { src: '../A (6).JPG' },
+          { src: '../A (7).JPG' },
+          { src: '../A (8).JPG' },
+          { src: '../A (9).JPG' },
+          { src: '../A (10).JPG' },
+          { src: '../A (11).JPG' },
+          { src: '../A (13).JPG' },
+          { src: '../A (14).JPG' },
+          { src: '../A (15).JPG' },
+          { src: '../A (16).JPG' },
+          { src: '../A (17).JPG' },
+          { src: '../A (18).JPG' },
+          { src: '../A (19).JPG' },
+          { src: '../A (20).JPG' },
+          { src: '../A (21).JPG' },
+          { src: '../A (22).JPG' },
+          { src: '../A (23).JPG' },
+          { src: '../A (24).JPG' },
+          { src: '../A (25).JPG' },
+          { src: '../A (26).JPG' },
+          { src: '../A (27).JPG' },
+          { src: '../A (28).JPG' },
+          { src: '../A (30).JPG' },
+          { src: '../A (31).JPG' },
+          { src: '../A (32).JPG' },
+          { src: '../A (33).JPG' },
+          { src: '../A (34).JPG' },
+          { src: '../A (35).JPG' },
+          { src: '../A (36).JPG' },
+          { src: '../A (37).JPG' },
+          { src: '../A (38).JPG' },
+          { src: '../A (39).JPG' },
+          { src: '../A (40).JPG' }
         ]
       }
-      // Próximo evento:
-      // { letter: 'B', title: 'Nombre', date: '—', description: '...', photos: [] }
     ];
 
     const selected = new Set();
