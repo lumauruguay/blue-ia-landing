@@ -1,1 +1,282 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Luma Audiovisuales – Fotos</title><style>*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#000;--text:#fff;--muted:#aaa;--border:#333;--red:#c00;--red-hover:#f00}body{background:var(--bg);color:var(--text);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;min-height:100vh}header{border-bottom:1px solid var(--border);padding:28px 40px 20px;display:flex;align-items:baseline;gap:12px}header h1{font-size:1.25rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}header span{color:var(--red);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}nav{padding:0 40px;border-bottom:1px solid var(--border);display:flex;overflow-x:auto}nav button{background:none;border:0;border-bottom:2px solid transparent;padding:14px 20px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--muted);white-space:nowrap}nav button:hover,nav button.active{color:var(--text)}nav button.active{border-bottom-color:var(--red);font-weight:600}main{padding:36px 40px;max-width:1200px}.event-panel{display:none}.event-panel.active{display:block}.event-meta{margin-bottom:28px;max-width:600px}.event-meta h2{font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}.event-meta .date{font-size:.78rem;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}.event-meta p{font-size:.9rem;color:var(--muted);line-height:1.65}.photo-grid{columns:3 375px;column-gap:10px;margin-bottom:40px}.photo-item{position:relative;display:inline-block;width:100%;margin:0 0 10px;cursor:pointer;border:2px solid transparent;break-inside:avoid;transition:border-color .15s;user-select:none}.photo-item img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}.photo-item:before{content:attr(data-code);position:absolute;top:6px;right:6px;background:rgba(0,0,0,.55);color:#fff;font-size:.65rem;letter-spacing:.08em;padding:2px 5px;z-index:2}.photo-item.selected{border-color:var(--red)}.photo-item.selected:after{content:attr(data-code);position:absolute;bottom:0;left:0;right:0;background:rgba(204,0,0,.88);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-align:center;padding:4px 0}#cart-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:100;transform:translateY(100%);transition:transform .25s ease}#cart-bar.visible{transform:translateY(0)}#cart-summary{font-size:.82rem;color:var(--muted)}#cart-summary strong{color:var(--text)}#cart-codes{font-size:.78rem;color:var(--red);letter-spacing:.06em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#btn-whatsapp{background:var(--red);color:#fff;border:0;padding:10px 22px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap}#btn-whatsapp:hover{background:var(--red-hover)}#btn-clear{background:none;border:1px solid var(--border);color:var(--muted);padding:10px 14px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}#btn-clear:hover{border-color:var(--red);color:var(--red)}@media(max-width:600px){header,nav,main{padding-left:16px;padding-right:16px}.photo-grid{columns:2 160px;column-gap:8px}.photo-item{margin-bottom:8px}#cart-bar{padding:12px 16px}}</style></head><body><script>document.addEventListener('contextmenu',e=>e.preventDefault())</script><header><h1>Luma Audiovisuales</h1><span>Fotos</span></header><nav id="tab-nav"></nav><main id="main-content"></main><div id="cart-bar"><div id="cart-summary"><strong id="cart-count">0</strong> foto(s) seleccionada(s)</div><div id="cart-codes"></div><button id="btn-clear" onclick="clearCart()">Limpiar</button><button id="btn-whatsapp" onclick="openWhatsApp()">Contactar por WhatsApp</button></div><script>const WHATSAPP_NUMBER='59891979237',photoNumbers=[1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38,39,40],photos=photoNumbers.map(n=>({src:`../A (${n}).JPG`,code:`A${String(n).padStart(3,'0')}`})),events=[{letter:'A',title:'Recital de Cámara',date:'12 de agosto de 2026',description:'Recital concierto de cámara en Sala Zitarrosa.',photos}],selected=new Set,nav=document.getElementById('tab-nav'),mainEl=document.getElementById('main-content');events.forEach((ev,idx)=>{const btn=document.createElement('button');btn.textContent=ev.title;btn.dataset.idx=idx;if(!idx)btn.classList.add('active');btn.addEventListener('click',()=>switchTab(idx));nav.appendChild(btn);const panel=document.createElement('div');panel.className='event-panel'+(!idx?' active':'');panel.id='panel-'+idx;panel.innerHTML=`<div class="event-meta"><h2>${ev.title}</h2><div class="date">${ev.date}</div><p>${ev.description}</p></div><div class="photo-grid" id="grid-${idx}"></div>`;mainEl.appendChild(panel);const grid=panel.querySelector('#grid-'+idx);ev.photos.forEach(photo=>{const code=photo.code,item=document.createElement('div');item.className='photo-item';item.setAttribute('data-code',code);item.innerHTML=`<img src="${photo.src}" alt="${code}" draggable="false">`;item.addEventListener('click',()=>toggleSelect(item,code));grid.appendChild(item)})});function switchTab(idx){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.event-panel').forEach(p=>p.classList.remove('active'));document.querySelector(`nav button[data-idx="${idx}"]`).classList.add('active');document.getElementById('panel-'+idx).classList.add('active')}function toggleSelect(item,code){selected.has(code)?(selected.delete(code),item.classList.remove('selected')):(selected.add(code),item.classList.add('selected'));updateCart()}function clearCart(){selected.clear();document.querySelectorAll('.photo-item.selected').forEach(el=>el.classList.remove('selected'));updateCart()}function updateCart(){const count=selected.size;document.getElementById('cart-count').textContent=count;document.getElementById('cart-codes').textContent=[...selected].sort().join(', ');document.getElementById('cart-bar').classList.toggle('visible',count>0)}function openWhatsApp(){if(!selected.size)return;const codes=[...selected].sort().join(', '),msg=encodeURIComponent(`Hola Luma, me interesan las siguientes fotos de Luma Audiovisuales:\n${codes}\n\n¿Podés darme más información sobre formatos y precios?`);window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank')}</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .material-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .material-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .material-item label {
+            flex-grow: 1;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .material-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #999;
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .bottom-bar .info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .bottom-bar .codes {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .bottom-bar .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .bottom-bar button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .clear-btn {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .whatsapp-bar-btn {
+            background-color: #d32f2f;
+            color: white;
+        }
+        
+        .whatsapp-bar-btn:hover {
+            background-color: #b71c1c;
+        }
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .bottom-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px 15px;
+            }
+            
+            .bottom-bar .info-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            
+            .bottom-bar .info {
+                font-size: 0.85rem;
+            }
+            
+            .bottom-bar .codes {
+                font-size: 0.8rem;
+                text-align: right;
+            }
+            
+            .bottom-bar .actions {
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            .bottom-bar button {
+                flex: 1;
+                padding: 12px 15px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Materiales</h1>
+        <div id="materials-list"></div>
+    </div>
+    
+    <div class="bottom-bar">
+        <div class="info-row">
+            <div>
+                <div class="info"><span id="selected-count">0</span> foto(s) seleccionada(s)</div>
+                <div class="codes" id="selected-codes"></div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="clear-btn" onclick="clearSelection()">Limpiar</button>
+            <button class="whatsapp-bar-btn" onclick="contactWhatsApp()">Contactar por WhatsApp</button>
+        </div>
+    </div>
+    
+    <script>
+        const materials = [
+            { id: 1, name: "A013 - PINTURA LATEX BLANCO INTERIOR X 20 LTS", code: "A013" },
+            { id: 2, name: "A030 - PINTURA LATEX BLANCO INTERIOR X 10 LTS", code: "A030" },
+            { id: 3, name: "A047 - PINTURA LATEX BLANCO INTERIOR X 4 LTS", code: "A047" },
+            { id: 4, name: "A054 - PINTURA LATEX BLANCO INTERIOR X 1 LTS", code: "A054" },
+            { id: 5, name: "A061 - PINTURA LATEX BLANCO INTERIOR X 500 ML", code: "A061" },
+            { id: 6, name: "A078 - PINTURA LATEX BLANCO INTERIOR X 250 ML", code: "A078" },
+            { id: 7, name: "A085 - PINTURA LATEX BLANCO INTERIOR X 100 ML", code: "A085" },
+            { id: 8, name: "A092 - PINTURA LATEX BLANCO INTERIOR X 50 ML", code: "A092" },
+            { id: 9, name: "A106 - PINTURA LATEX BLANCO INTERIOR X 25 ML", code: "A106" },
+            { id: 10, name: "A113 - PINTURA LATEX BLANCO INTERIOR X 10 ML", code: "A113" },
+            { id: 11, name: "A120 - PINTURA LATEX BLANCO INTERIOR X 5 ML", code: "A120" },
+            { id: 12, name: "A137 - PINTURA LATEX BLANCO INTERIOR X 2 ML", code: "A137" },
+            { id: 13, name: "A144 - PINTURA LATEX BLANCO INTERIOR X 1 ML", code: "A144" },
+            { id: 14, name: "A151 - PINTURA LATEX BLANCO INTERIOR X 0.5 ML", code: "A151" },
+            { id: 15, name: "A168 - PINTURA LATEX BLANCO INTERIOR X 0.25 ML", code: "A168" },
+            { id: 16, name: "A175 - PINTURA LATEX BLANCO INTERIOR X 0.1 ML", code: "A175" },
+            { id: 17, name: "A182 - PINTURA LATEX BLANCO INTERIOR X 0.05 ML", code: "A182" },
+            { id: 18, name: "A199 - PINTURA LATEX BLANCO INTERIOR X 0.02 ML", code: "A199" },
+            { id: 19, name: "A205 - PINTURA LATEX BLANCO INTERIOR X 0.01 ML", code: "A205" },
+            { id: 20, name: "A212 - PINTURA LATEX BLANCO INTERIOR X 0.005 ML", code: "A212" }
+        ];
+        
+        let selectedMaterials = new Set();
+        
+        function renderMaterials() {
+            const list = document.getElementById('materials-list');
+            list.innerHTML = '';
+            
+            materials.forEach(material => {
+                const item = document.createElement('div');
+                item.className = 'material-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `material-${material.id}`;
+                checkbox.checked = selectedMaterials.has(material.id);
+                checkbox.addEventListener('change', () => toggleSelection(material.id));
+                
+                const label = document.createElement('label');
+                label.htmlFor = `material-${material.id}`;
+                label.textContent = material.name;
+                
+                item.appendChild(checkbox);
+                item.appendChild(label);
+                list.appendChild(item);
+            });
+        }
+        
+        function toggleSelection(id) {
+            if (selectedMaterials.has(id)) {
+                selectedMaterials.delete(id);
+            } else {
+                selectedMaterials.add(id);
+            }
+            updateBottomBar();
+        }
+        
+        function clearSelection() {
+            selectedMaterials.clear();
+            updateBottomBar();
+            renderMaterials();
+        }
+        
+        function updateBottomBar() {
+            document.getElementById('selected-count').textContent = selectedMaterials.size;
+            
+            const codes = Array.from(selectedMaterials)
+                .map(id => materials.find(m => m.id === id)?.code)
+                .filter(Boolean)
+                .join(', ');
+            
+            document.getElementById('selected-codes').textContent = codes;
+        }
+        
+        function contactWhatsApp() {
+            if (selectedMaterials.size === 0) {
+                alert('Por favor, selecciona al menos un material.');
+                return;
+            }
+            
+            const selectedCodes = Array.from(selectedMaterials)
+                .map(id => materials.find(m => m.id === id)?.code)
+                .filter(Boolean);
+            
+            const message = `Hola, estoy interesado en los siguientes materiales:\n${selectedCodes.join('\n')}`;
+            const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        renderMaterials();
+    </script>
+</body>
+</html>
